@@ -3,7 +3,7 @@ import subprocess
 
 app = Flask("__telestream__")
 
-def executor(chat, url, session, as_chat):
+def executor(chat, url):
     process = subprocess.Popen(["python3", "-u", "client.py", f"{chat}", f"{url}"], stdout=subprocess.PIPE, universal_newlines=True)
     for line in process.stdout:
         yield str(line + "\n")
