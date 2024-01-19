@@ -41,6 +41,8 @@ def play_requested_media(c, m):
     if not media:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
+    if any(pre in media for pre in ["youtube", "youtu.be"]):
+        media = get_yt(media)
     m.reply(f"Đã chuyển kênh", quote=True)
     app.change_stream(chat, MediaStream(media,))
     
