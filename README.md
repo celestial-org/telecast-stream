@@ -1,5 +1,5 @@
 # telestream
 Telegram Livestream
-1) Get session string by run `python3 export.py`
-2) Copy session string and set as environment variable with key name *SESSION*
-3) Run `bash start.sh`
+1) Chạy lệnh `python3 export.py` để lấy session string
+2) Copy session string và đặt biến môi trường *SESSION* bằng lệnh export SESSION=session_string
+3) Chạy lệnh `bash start.sh` và port 8080 sẽ mở
