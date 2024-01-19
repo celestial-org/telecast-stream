@@ -13,4 +13,8 @@ def executor(chat, url):
 def telestream__():
     chat = request.args.get("chat")
     url = request.args.get("url")
+    if not chat:
+        return "Cần tham số chat=(username hoặc id của nhóm, channel)"
+    if not url:
+        return "Cần tham số url=(Liên kết video/âm thanh để phát trực tiếp)"
     return Response(executor(chat, url), content_type="text/plain")
