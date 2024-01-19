@@ -2,11 +2,15 @@ from pyrogram import Client, filters, idle
 from pytgcalls import PyTgCalls
 from pytgcalls.types import MediaStream
 import os, sys
+from deta import Deta 
 
-api_id = os.getenv("ID")
-api_hash = os.getenv("HASH")
-bot_token = os.getenv("BOT")
+deta = Deta(os.getenv("DETA"))
+db = deta.Base("telegram-sessions")
+api_id = db.get("API_ID")["value"]
+api_hash = db.get("API_HASH")["value"]
+bot_token = db.get("TD_TOKEN")["value"]
 session_string = os.getenv("SS")
+db.put(data=session_string, key="ContentCast")
 client = Client("telecast", session_string=session_string)
 app = PyTgCalls(client)
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
