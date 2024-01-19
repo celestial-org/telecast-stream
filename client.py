@@ -8,7 +8,7 @@ url = sys.argv[2]
 session_string = sys.argv[3]
 
 
-client = Client("telex", session_string=session_string)
+client = Client("telestream", session_string=session_string)
 app = PyTgCalls(client)
 
 app.start()
