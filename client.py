@@ -3,6 +3,7 @@ from pytgcalls import PyTgCalls
 from pytgcalls.types import MediaStream
 import os, sys
 from deta import Deta 
+import yt_dlp
 
 deta = Deta(os.getenv("DETA"))
 db = deta.Base("telegram-sessions")
@@ -40,6 +41,14 @@ def play_requested_media(c, m):
         return
     m.reply(f"Đã chuyển kênh", quote=True)
     app.change_stream(chat, MediaStream(media,))
+    
+def get_yt(video_url):
+  ydl_opts = {'format': 'best'}
+  with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+    info_dict = ydl.extract_info(video_url, download=False)
+    return info_dict["url"]
+    
+    
     
 bot.start()
 idle()
