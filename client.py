@@ -36,3 +36,6 @@ def play_requested_media(c, m):
         return
     m.reply(f"Bắt đầu phát {media}" quote=True)
     app.change_stream(chat, MediaStream(media,))
+    
+bot.start()
+idle()
