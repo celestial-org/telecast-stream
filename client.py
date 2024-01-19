@@ -9,7 +9,7 @@ bot_token = os.getenv("BOT")
 session_string = os.getenv("SS")
 client = Client("telecast", session_string=session_string)
 app = PyTgCalls(client)
-bot = Client("Bot", api_id, api_hash, bot_token=bot_token)
+bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
 app.start()
 
 @bot.on_message(filters.command("join") & filters.user([5665225938,-1001559828576]))
