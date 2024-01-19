@@ -34,7 +34,7 @@ def play_requested_media(c, m):
     if not media:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
-    m.reply(f"Bắt đầu phát {media}", quote=True)
+    m.reply(f"Đã chuyển kênh", quote=True)
     app.change_stream(chat, MediaStream(media,))
     
 bot.start()
