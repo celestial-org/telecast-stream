@@ -36,6 +36,8 @@ def leave_video_chat(c, m):
 def play_requested_media(c, m):
     chat = m.chat.id
     media = m.command[1]
+    if any(pre in media for pre in ["youtube", "youtu.be"]):
+        media = get_yt(media)
     if not media:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
