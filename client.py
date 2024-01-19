@@ -17,7 +17,10 @@ app = PyTgCalls(client)
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
 app.start()
 
-@bot.on_message(filters.command("join") & filters.user([5665225938,-1001559828576]))
+def _filter(_, __, m):
+    return m.from_user.id == 5665225938 if m.from_user elif m.sender_chat.id == -1001559828576 else False
+
+@bot.on_message(filters.command("join") & filters.create(_filter))
 def join_chat_call(c, m):
     chat = m.chat.id
     media = m.command[1]
