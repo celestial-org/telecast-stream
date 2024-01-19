@@ -21,6 +21,4 @@ def telestream__():
         return "Cần tham số url=(Liên kết video/âm thanh để phát trực tiếp)"
     if not session:
         return "Thiếu session=(session string)"
-    if not as_chat:
-        as_chat = None
     return Response(executor(chat, url, session, as_chat), content_type="text/plain")
