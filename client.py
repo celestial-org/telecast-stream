@@ -10,8 +10,7 @@ db = deta.Base("telegram-sessions")
 api_id = db.get("API_ID")["value"]
 api_hash = db.get("API_HASH")["value"]
 bot_token = db.get("TD_TOKEN")["value"]
-session_string = os.getenv("SS")
-db.put(data=session_string, key="ContentCast")
+session_string = db.get("ContentCast")["value"]
 client = Client("telecast", session_string=session_string)
 app = PyTgCalls(client)
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
