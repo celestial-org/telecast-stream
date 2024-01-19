@@ -12,7 +12,7 @@ app = PyTgCalls(client)
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token)
 app.start()
 
-@bot.on_message(filters.command("join") & filters.user(5665225938))
+@bot.on_message(filters.command("join") & filters.user([5665225938,-1001559828576]))
 def join_chat_call(c, m):
     chat = m.chat.id
     media = m.command[1]
@@ -22,7 +22,7 @@ def join_chat_call(c, m):
     except:
         m.reply("Không thể phát trực tiếp")
         
-@bot.on_message(filters.command("quit") & filters.user(5665225938))
+@bot.on_message(filters.command("quit") & filters.user([5665225938,-1001559828576]))
 def leave_video_chat(c, m):
     app.leave_group_call(m.chat.id,)
     m.reply("Đã ngừng phát")
