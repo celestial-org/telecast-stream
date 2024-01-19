@@ -2,3 +2,4 @@ pyrogram
 py-tgcalls
 flask
 gunicorn
+tgcrypto
