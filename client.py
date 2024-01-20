@@ -10,9 +10,6 @@ app = PyTgCalls(Client("telecast", session_string=session))
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
 app.start()
 
-def _filter(_, __, m):
-    return m.from_user.id == 5665225938 if m.from_user else (m.sender_chat.id == -1001559828576)
-    
 @bot.on_message(filters.command("join") & filters.create(on_channel))
 def join_chat_call(c, m):
     chat = m.chat.id
@@ -25,10 +22,17 @@ def join_chat_call(c, m):
         m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
     m.delete()
         
-@bot.on_message(filters.command("leave") & filters.user([5665225938,-1001559828576]))
+@bot.on_message(filters.command("leave") & filters.create(on_channel))
 def leave_video_chat(c, m):
     app.leave_group_call(m.chat.id,)
     m.reply("Đã ngừng phát sóng")
+    m.delete()
+    
+@bot.on_message(filters.command("volume") & filters.create(on_channel))
+def change_volume(c, m):
+    v = m.command[1]
+    app.change_volume_call(m.chat.id, v,)
+    m.reply(f"Đã thay đổi mức âm lượng thành {v}")
     m.delete()
 
 @bot.on_message(filters.command("play"))
@@ -51,6 +55,9 @@ def play_requested_media(c, m):
             media = get_audio(url)
         else:
             media = get_video(url)
+     
+    if types == "content":
+        media = "http://127.0.0.1:8080/content"
     else:
         media = url
     m.reply(f"**[{m.from_user.first_name}](tg://user?id={m.from_user.id})** đã gửi yêu cầu phát sóng [liên kết]({url})")
