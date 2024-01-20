@@ -1,4 +1,5 @@
 from deta import Deta 
+import os
 
 deta = Deta(os.getenv("DETA"))
 db = deta.Base("telegram-sessions")
