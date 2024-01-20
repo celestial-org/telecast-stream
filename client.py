@@ -101,10 +101,10 @@ def play_requested_media(c, m):
             media = get_audio(url)
         else:
             media = get_video(url)
-    if m.command[1] == "content":
-        media = "http://127.0.0.1:8080/content.mp4"
     else:
         media = url
+    if m.command[1] == "content":
+        media = "http://127.0.0.1:8080/content.mp4"
     m.reply(f"**[{m.from_user.first_name}](tg://user?id={m.from_user.id})** đã gửi yêu cầu phát sóng [liên kết]({url})")
     m.delete()
     app.change_stream(chat, MediaStream(media,))
@@ -128,10 +128,10 @@ def request_channel_cast(c, m):
             media = get_audio(url)
         else:
             media = get_video(url)
-    if m.command[1] == "content":
-        media = "http://127.0.0.1:8080/content.mp4"
     else:
         media = url
+    if m.command[1] == "content":
+        media = "http://127.0.0.1:8080/content.mp4"
     m.reply(f"[Liên kết]({url}) đã bắt đầu phát sóng")
     m.delete()
     app.change_stream(chat, MediaStream(media,))
