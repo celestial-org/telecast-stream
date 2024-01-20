@@ -2,24 +2,18 @@ from pyrogram import Client, filters, idle
 from pytgcalls import PyTgCalls
 from pytgcalls.types import MediaStream
 import os, sys
-from deta import Deta 
-import yt_dlp
+from init import api_id, api_hash, bot_token, session
+from custom import on_channel
+from api import get_video, get_audio
 
-deta = Deta(os.getenv("DETA"))
-db = deta.Base("telegram-sessions")
-api_id = db.get("API_ID")["value"]
-api_hash = db.get("API_HASH")["value"]
-bot_token = db.get("TD_TOKEN")["value"]
-session_string = db.get("ContentCast")["value"]
-client = Client("telecast", session_string=session_string)
-app = PyTgCalls(client)
+app = PyTgCalls(Client("telecast", session_string=session))
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
 app.start()
 
 def _filter(_, __, m):
     return m.from_user.id == 5665225938 if m.from_user else (m.sender_chat.id == -1001559828576)
     
-@bot.on_message(filters.command("join") & filters.create(_filter))
+@bot.on_message(filters.command("join") & filters.create(on_channel))
 def join_chat_call(c, m):
     chat = m.chat.id
     media = m.command[1]
@@ -47,14 +41,6 @@ def play_requested_media(c, m):
         media = get_yt(media)
     m.reply(f"Đã chuyển kênh", quote=True)
     app.change_stream(chat, MediaStream(media,))
-    
-def get_yt(video_url):
-  ydl_opts = {'format': 'best'}
-  with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-    info_dict = ydl.extract_info(video_url, download=False)
-    return info_dict["url"]
-    
-    
     
 bot.start()
 idle()
