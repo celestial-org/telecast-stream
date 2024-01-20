@@ -15,13 +15,12 @@ def join_chat_call(c, m):
     chat = m.chat.id
     url = m.command[1]
     if len(m.command) > 2:
-        types = m.command[1]
         url = m.command[2]
     if not url:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
     if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
-        if types == "music":
+        if m.command[1] == "music":
             media = get_audio(url)
         else:
             media = get_video(url)
@@ -41,12 +40,11 @@ def join_content_channel(c, m):
     chat = "contentdownload"
     url = m.command[1]
     if len(m.command) > 2:
-        types = m.command[1]
         url = m.command[2]
     if not url:
         return
     if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
-        if types == "music":
+        if m.command[1] == "music":
             media = get_audio(url)
         else:
             media = get_video(url)
