@@ -21,6 +21,5 @@ def stream_content_channel():
                     yield chunk
             except:
                 pass
-            time.sleep(2)
     return Response(gen(), mimetype="video/mp4")
                  
