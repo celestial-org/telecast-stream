@@ -12,7 +12,7 @@ def telestream__():
     return "OK"
     
 @app.route("/content.mp4")
-def stream_content_channel(c, m):
+def stream_content_channel():
     def gen():
         for i in ran(0, 2000):
             try:
