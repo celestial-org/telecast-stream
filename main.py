@@ -20,6 +20,6 @@ def stream_content_channel():
                 for chunk in bot.stream_media(msg):
                     yield chunk
             except:
-                pass
+                continue
     return Response(gen(), mimetype="video/mp4")
                  
