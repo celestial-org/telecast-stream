@@ -1,6 +1,6 @@
 from flask import Flask, Response
 from pyrogram import Client
-from init import api_id, api_hash, bot_token
+from init import api_id, api_hash, cd_token
 import time
 
 app = Flask("__telestream__")
@@ -11,7 +11,7 @@ def telestream__():
     
 @app.route("/content.mp4")
 def stream_content_channel():
-    bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
+    bot = Client("Bot", api_id, api_hash, bot_token=cd_token, in_memory=True)
     try:
         bot.start()
     except:
