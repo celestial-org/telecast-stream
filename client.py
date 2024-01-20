@@ -35,6 +35,11 @@ def leave_video_chat(c, m):
 def play_requested_media(c, m):
     chat = m.chat.id
     media = m.command[1]
+    try:
+        app.get_call(chat)
+    except:
+        m.reply("Không có phiên phát sóng nào mở cả", quote=True)
+        return
     if len(m.command) > 2:
         types = m.command[1]
         url = m.command[2]
