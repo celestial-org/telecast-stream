@@ -1,7 +1,8 @@
 from flask import Flask
 from pyrogram import Client, Response
-app = Flask("__telestream__")
+from init import api_id, api_hash, bot_token
 
+app = Flask("__telestream__")
 
 @app.route("/")
 def telestream__():
