@@ -1,5 +1,5 @@
-from flask import Flask
-from pyrogram import Client, Response
+from flask import Flask, Response
+from pyrogram import Client
 from init import api_id, api_hash, bot_token
 import time
 
