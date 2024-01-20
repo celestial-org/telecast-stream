@@ -14,7 +14,7 @@ def telestream__():
 @app.route("/content.mp4")
 def stream_content_channel():
     def gen():
-        for i in ran(1, 2000):
+        for i in range(1, 2000):
             try:
                 msg = bot.get_messages("contentdownload", message_ids=i)
                 for chunk in bot.stream_media(msg):
