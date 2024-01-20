@@ -4,6 +4,8 @@ from init import api_id, api_hash, cd_token
 import time
 
 app = Flask("__telestream__")
+bot = Client("Bot", api_id, api_hash, bot_token=cd_token, in_memory=True)
+bot.start()
 
 @app.route("/")
 def telestream__():
@@ -11,11 +13,6 @@ def telestream__():
     
 @app.route("/content.mp4")
 def stream_content_channel():
-    bot = Client("Bot", api_id, api_hash, bot_token=cd_token, in_memory=True)
-    try:
-        bot.start()
-    except:
-        pass
     def gen():
         for i in range(1, 2000):
             try:
