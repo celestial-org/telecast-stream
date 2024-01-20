@@ -1,6 +1,6 @@
 from pyrogram import Client, filters, idle
 from pytgcalls import PyTgCalls
-from pytgcalls.types import MediaStream
+from pytgcalls.types import MediaStream, AudioParameters, VideoParameters, AudioQuality, VideoQuality
 import os, sys
 from init import api_id, api_hash, bot_token, session
 from custom import on_channel
@@ -9,6 +9,9 @@ from api import get_video, get_audio
 app = PyTgCalls(Client("telecast", session_string=session))
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
 app.start()
+
+def stream(media):
+    return MediaStream(media,audio_parameters=AudioParameters(AudioQuality.STUDIO), video_parameters=VideoParameters(VideoQuality.UHD_4K))
 
 @bot.on_message(filters.command("join") & filters.create(on_channel))
 def join_chat_call(c, m):
