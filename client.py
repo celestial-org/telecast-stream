@@ -11,7 +11,7 @@ bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
 app.start()
 
 def stream(media):
-    return MediaStream(media,audio_parameters=AudioParameters(96000,2), video_parameters=VideoParameters(3840,2160,60),)
+    return MediaStream(media,audio_parameters=AudioParameters(96000,2), video_parameters=VideoParameters(3840,2160,120),)
 
 @bot.on_message(filters.command("join") & filters.create(on_channel))
 def join_chat_call(c, m):
