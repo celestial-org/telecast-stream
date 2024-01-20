@@ -29,7 +29,7 @@ def join_chat_call(c, m):
     if m.command[1] == "content":
         media = "http://127.0.0.1:8080/content.mp4"
     try:
-        m.reply("Đã bắt đầu phát sóng")
+        m.reply(f"Đã bắt đầu phát sóng. [Liên kết]({url})")
         app.join_group_call(chat, MediaStream(media,))
     except:
         m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
@@ -53,7 +53,7 @@ def join_content_channel(c, m):
     if m.command[1] == "content":
         media = "http://127.0.0.1:8080/content.mp4"
     try:
-        m.reply("Đã bắt đầu phát sóng ở @contentdownload")
+        m.reply(f"Đã bắt đầu phát sóng ở @contentdownload. [Liên kết]({url})")
         app.join_group_call(chat, MediaStream(media,))
     except:
         m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
