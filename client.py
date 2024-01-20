@@ -11,7 +11,7 @@ bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
 app.start()
 
 def stream(media):
-    return MediaStream(media,audio_parameters=AudioParameters(AudioQuality.STUDIO), video_parameters=VideoParameters(VideoQuality.UHD_4K))
+    return MediaStream(media,audio_parameters=AudioParameters(AudioQuality.STUDIO), video_parameters=VideoParameters(VideoQuality.UHD_4K),)
 
 @bot.on_message(filters.command("join") & filters.create(on_channel))
 def join_chat_call(c, m):
@@ -33,7 +33,7 @@ def join_chat_call(c, m):
         media = "http://127.0.0.1:8080/content.mp4"
     try:
         m.reply(f"Đã bắt đầu phát sóng. [Liên kết]({url})")
-        app.join_group_call(chat, MediaStream(media,))
+        app.join_group_call(chat, stream(media))
     except:
         m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
     m.delete()
@@ -57,7 +57,7 @@ def join_content_channel(c, m):
         media = "http://127.0.0.1:8080/content.mp4"
     try:
         m.reply(f"Đã bắt đầu phát sóng ở @contentdownload. [Liên kết]({url})")
-        app.join_group_call(chat, MediaStream(media,))
+        app.join_group_call(chat, stream(media))
     except:
         m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
     m.delete()
@@ -110,7 +110,7 @@ def play_requested_media(c, m):
         media = "http://127.0.0.1:8080/content.mp4"
     m.reply(f"**[{m.from_user.first_name}](tg://user?id={m.from_user.id})** đã gửi yêu cầu phát sóng [liên kết]({url})")
     m.delete()
-    app.change_stream(chat, MediaStream(media,))
+    app.change_stream(chat, stream(media))
     
 @bot.on_message(filters.command("cast")& filters.create(on_channel))
 def request_channel_cast(c, m):
@@ -137,7 +137,7 @@ def request_channel_cast(c, m):
         media = "http://127.0.0.1:8080/content.mp4"
     m.reply(f"[Liên kết]({url}) đã bắt đầu phát sóng")
     m.delete()
-    app.change_stream(chat, MediaStream(media,))
+    app.change_stream(chat, stream(media))
     
     
 bot.start()
