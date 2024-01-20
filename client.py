@@ -72,7 +72,11 @@ def leave_video_chat(c, m):
 @bot.on_message(filters.command("volume") & filters.create(on_channel))
 def change_volume(c, m):
     v = m.command[1]
-    app.change_volume_call(m.chat.id, v,)
+    chat = m.chat.id
+    if len(m.command) > 2 and m.command[1] == "channel":
+        v = m.command[2]
+        chat = "contentdownload"
+    app.change_volume_call(chat, v,)
     m.reply(f"Đã thay đổi mức âm lượng thành {v}")
     m.delete()
 
