@@ -46,7 +46,7 @@ def play_requested_media(c, m):
     if not media:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
-    if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok"]):
+    if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
         if types == "music":
             media = get_audio(url)
         else:
