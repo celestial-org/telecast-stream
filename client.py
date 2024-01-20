@@ -87,7 +87,7 @@ def change_volume(c, m):
 @bot.on_message(filters.command("play"))
 def play_requested_media(c, m):
     chat = m.chat.id
-    media = m.command[1]
+    url = m.command[1]
     try:
         app.get_call(chat)
     except:
@@ -96,7 +96,7 @@ def play_requested_media(c, m):
     if len(m.command) > 2:
         types = m.command[1]
         url = m.command[2]
-    if not media:
+    if not url:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
     if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
