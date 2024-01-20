@@ -14,7 +14,19 @@ app.start()
 def join_chat_call(c, m):
     chat = m.chat.id
     media = m.command[1]
-    
+    if len(m.command) > 2:
+        types = m.command[1]
+        url = m.command[2]
+    if not media:
+        m.reply("Không tìm thấy nội dung", quote=True)
+        return
+    if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
+        if types == "music":
+            media = get_audio(url)
+        else:
+            media = get_video(url)
+    if types == "content":
+        media = "http://127.0.0.1:8080/content.mp4"
     try:
         m.reply("Đã bắt đầu phát sóng")
         app.join_group_call(chat, MediaStream(media,))
@@ -55,9 +67,8 @@ def play_requested_media(c, m):
             media = get_audio(url)
         else:
             media = get_video(url)
-     
     if types == "content":
-        media = "http://127.0.0.1:8080/content"
+        media = "http://127.0.0.1:8080/content.mp4"
     else:
         media = url
     m.reply(f"**[{m.from_user.first_name}](tg://user?id={m.from_user.id})** đã gửi yêu cầu phát sóng [liên kết]({url})")
