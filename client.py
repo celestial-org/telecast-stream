@@ -25,10 +25,11 @@ def join_chat_call(c, m):
         m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
     m.delete()
         
-@bot.on_message(filters.command("quit") & filters.user([5665225938,-1001559828576]))
+@bot.on_message(filters.command("leave") & filters.user([5665225938,-1001559828576]))
 def leave_video_chat(c, m):
     app.leave_group_call(m.chat.id,)
-    m.reply("Đã ngừng phát")
+    m.reply("Đã ngừng phát sóng")
+    m.delete()
 
 @bot.on_message(filters.command("play"))
 def play_requested_media(c, m):
