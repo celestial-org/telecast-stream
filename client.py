@@ -25,7 +25,7 @@ def join_chat_call(c, m):
             media = get_audio(url)
         else:
             media = get_video(url)
-    if types == "content":
+    if m.command[1] == "content":
         media = "http://127.0.0.1:8080/content.mp4"
     try:
         m.reply("Đã bắt đầu phát sóng")
@@ -67,7 +67,7 @@ def play_requested_media(c, m):
             media = get_audio(url)
         else:
             media = get_video(url)
-    if types == "content":
+    if m.command[1] == "content":
         media = "http://127.0.0.1:8080/content.mp4"
     else:
         media = url
