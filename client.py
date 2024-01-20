@@ -112,5 +112,34 @@ def play_requested_media(c, m):
     m.delete()
     app.change_stream(chat, MediaStream(media,))
     
+@bot.on_message(filters.command("cast")& filters.create(on_channel))
+def request_channel_cast(c, m):
+    chat = "contentdownload"
+    url = m.command[1]
+    try:
+        app.get_call(chat)
+    except:
+        m.reply("Không có phiên phát sóng nào mở ở @contentdownload", quote=True)
+        return
+    if len(m.command) > 2:
+        types = m.command[1]
+        url = m.command[2]
+    if not url:
+        m.reply("Không tìm thấy nội dung", quote=True)
+        return
+    if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
+        if types == "music":
+            media = get_audio(url)
+        else:
+            media = get_video(url)
+    if m.command[1] == "content":
+        media = "http://127.0.0.1:8080/content.mp4"
+    else:
+        media = url
+    m.reply(f"[Liên kết]({url}) đã bắt đầu phát sóng")
+    m.delete()
+    app.change_stream(chat, MediaStream(media,))
+    
+    
 bot.start()
 idle()
