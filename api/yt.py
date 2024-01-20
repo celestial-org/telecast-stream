@@ -7,7 +7,7 @@ def get_video(video_url):
     return info_dict["url"]
     
 def get_audio(url):
-  ydl_opts = {'format': 'worstaudio'}
+  ydl_opts = {'format': 'bestaudio/best'}
   with yt_dlp.YoutubeDL(ydl_opts) as ydl:
     info_dict = ydl.extract_info(url, download=False)
     return info_dict["url"]
