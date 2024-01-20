@@ -63,7 +63,7 @@ def join_content_channel(c, m):
         
 @bot.on_message(filters.command("endcast") & filters.create(on_channel))
 def leave_content_channel(c, m):
-    app.leave_group_call(m.chat.id,)
+    app.leave_group_call("contentdownload",)
     m.reply("Đã ngừng phát sóng ở @contentdownload")
     m.delete()    
         
@@ -122,13 +122,12 @@ def request_channel_cast(c, m):
         m.reply("Không có phiên phát sóng nào mở ở @contentdownload", quote=True)
         return
     if len(m.command) > 2:
-        types = m.command[1]
         url = m.command[2]
     if not url:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
     if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
-        if types == "music":
+        if m.command[1] == "music":
             media = get_audio(url)
         else:
             media = get_video(url)
