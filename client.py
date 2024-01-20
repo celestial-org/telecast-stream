@@ -19,10 +19,11 @@ def join_chat_call(c, m):
     media = m.command[1]
     
     try:
-        m.reply("Đã bắt đầu phát")
+        m.reply("Đã bắt đầu phát sóng")
         app.join_group_call(chat, MediaStream(media,))
     except:
-        m.reply("Không thể phát trực tiếp")
+        m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
+    m.delete()
         
 @bot.on_message(filters.command("quit") & filters.user([5665225938,-1001559828576]))
 def leave_video_chat(c, m):
@@ -33,14 +34,21 @@ def leave_video_chat(c, m):
 def play_requested_media(c, m):
     chat = m.chat.id
     media = m.command[1]
-    if any(pre in media for pre in ["youtube", "youtu.be"]):
-        media = get_yt(media)
+    if len(m.command) > 2:
+        types = m.command[1]
+        url = m.command[2]
     if not media:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
-    if any(pre in media for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok"]):
-        media = get_yt(media)
-    m.reply(f"Đã chuyển kênh", quote=True)
+    if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok"]):
+        if types == "music":
+            media = get_audio(url)
+        else:
+            media = get_video(url)
+    else:
+        media = url
+    m.reply(f"**[{m.from_user.first_name}](tg://user?id={m.from_user.id})** đã gửi yêu cầu phát sóng [liên kết]({url})")
+    m.delete()
     app.change_stream(chat, MediaStream(media,))
     
 bot.start()
