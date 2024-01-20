@@ -13,11 +13,11 @@ app.start()
 @bot.on_message(filters.command("join") & filters.create(on_channel))
 def join_chat_call(c, m):
     chat = m.chat.id
-    media = m.command[1]
+    url = m.command[1]
     if len(m.command) > 2:
         types = m.command[1]
         url = m.command[2]
-    if not media:
+    if not url:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
     if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
@@ -25,6 +25,8 @@ def join_chat_call(c, m):
             media = get_audio(url)
         else:
             media = get_video(url)
+    else:
+        media = url
     if m.command[1] == "content":
         media = "http://127.0.0.1:8080/content.mp4"
     try:
@@ -37,17 +39,19 @@ def join_chat_call(c, m):
 @bot.on_message(filters.command("broadcast") & filters.create(on_channel))
 def join_content_channel(c, m):
     chat = "contentdownload"
-    media = m.command[1]
+    url = m.command[1]
     if len(m.command) > 2:
         types = m.command[1]
         url = m.command[2]
-    if not media:
+    if not url:
         return
     if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
         if types == "music":
             media = get_audio(url)
         else:
             media = get_video(url)
+    else:
+        media = url
     if m.command[1] == "content":
         media = "http://127.0.0.1:8080/content.mp4"
     try:
