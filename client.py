@@ -17,6 +17,7 @@ def _filter(_, __, m):
 def join_chat_call(c, m):
     chat = m.chat.id
     media = m.command[1]
+    
     try:
         m.reply("Đã bắt đầu phát")
         app.join_group_call(chat, MediaStream(media,))
@@ -37,7 +38,7 @@ def play_requested_media(c, m):
     if not media:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
-    if any(pre in media for pre in ["youtube", "youtu.be"]):
+    if any(pre in media for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok"]):
         media = get_yt(media)
     m.reply(f"Đã chuyển kênh", quote=True)
     app.change_stream(chat, MediaStream(media,))
