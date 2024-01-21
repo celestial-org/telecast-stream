@@ -46,7 +46,6 @@ def join_chat_call(c, m):
         url = m.command[1]
     except:
         url = "https://vt.tiktok.com/ZSNob298M/"
-        m.command[1] = url
     if len(m.command) > 2:
         url = m.command[2]
     if not url:
@@ -59,7 +58,7 @@ def join_chat_call(c, m):
             media = get_video(url)
     else:
         media = url
-    if m.command[1] == "content":
+    if url == "content":
         media = "http://127.0.0.1:8080/content.mp4"
     try:
         m.reply(f"Đã bắt đầu phát sóng. [Liên kết]({url})")
@@ -75,7 +74,6 @@ def join_content_channel(c, m):
         url = m.command[1]
     except:
         url = "https://vt.tiktok.com/ZSNob298M/"
-        m.command[1] = url
     if len(m.command) > 2:
         url = m.command[2]
     if not url:
@@ -87,7 +85,7 @@ def join_content_channel(c, m):
             media = get_video(url)
     else:
         media = url
-    if m.command[1] == "content":
+    if url == "content":
         media = "http://127.0.0.1:8080/content.mp4"
     try:
         m.reply(f"Đã bắt đầu phát sóng ở @contentdownload. [Liên kết]({url})")
