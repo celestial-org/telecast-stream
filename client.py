@@ -52,7 +52,7 @@ def join_chat_call(c, m):
         m.reply("Không tìm thấy nội dung", quote=True)
         return
     if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
-        if m.command[1] == "music":
+        if url == "music":
             media = get_audio(url)
         else:
             media = get_video(url)
