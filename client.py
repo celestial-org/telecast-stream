@@ -44,6 +44,7 @@ def join_chat_call(c, m):
     chat = m.chat.id
     try:
         url = m.command[1]
+    except:
         url = "https://vt.tiktok.com/ZSNob298M/"
         m.command[1] = url
     if len(m.command) > 2:
