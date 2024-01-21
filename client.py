@@ -44,9 +44,6 @@ def join_chat_call(c, m):
     chat = m.chat.id
     try:
         url = m.command[1]
-    except:
-        pass
-    if not url:
         url = "https://vt.tiktok.com/ZSNob298M/"
         m.command[1] = url
     if len(m.command) > 2:
@@ -76,9 +73,6 @@ def join_content_channel(c, m):
     try:
         url = m.command[1]
     except:
-        m.reply("Thiếu tham số", quote = True)
-        return 
-    if not url:
         url = "https://vt.tiktok.com/ZSNob298M/"
         m.command[1] = url
     if len(m.command) > 2:
