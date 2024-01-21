@@ -39,14 +39,15 @@ def set_stream_quality(c, m):
         pass
     m.reply(f"Cài đặt:\nAudio: `{aq}`\nVideo: `{vq}`\nffmpeg: `{ffmpeg_param}`")
 
-@bot.on_message(filters.command("join") & filters.create(on_channel))
+@bot.on_message(filters.command("join"))
 def join_chat_call(c, m):
     chat = m.chat.id
     try:
         url = m.command[1]
     except:
-        m.reply("Thiếu tham số", quote = True)
-        return 
+        pass
+    if not url:
+        url = "http://127.0.0.1:8080/content.mp4"
     if len(m.command) > 2:
         url = m.command[2]
     if not url:
