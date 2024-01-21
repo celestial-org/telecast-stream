@@ -10,13 +10,42 @@ app = PyTgCalls(Client("telecast", session_string=session))
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
 app.start()
 
+aq = 3000,1
+vq = 1920,1080,60
+ffmpeg_param = ""
+
 def stream(media):
-    return MediaStream(media,audio_parameters=AudioParameters(96000,2), video_parameters=VideoParameters(3840,2160,120),)
+    return MediaStream(
+        media,
+        audio_parameters=AudioParameters(*aq), 
+        video_parameters=VideoParameters(*vq), 
+        additional_ffmpeg_parameters=ffmpeg_param)
+
+@bot.on_message(filters.command("setting"))
+def set_stream_quality(c, m):
+    global ffmpeg_param, aq, vq
+    try:
+        for att in m.command:
+            if att.startswith("audio"):
+                att = att.split("=")[1]
+                aq = tuple(map(int, att.split(',')))
+            if att.startswith("video"):
+                att = att.split("=")[1]
+                vq = tuple(map(int, att.split(',')))
+            if att.startswith("ffmpeg"):
+                ffmpeg_param = att.split("=")[1]
+    except:
+        pass
+    m.reply(f"Cài đặt:\nAudio: `{aq}`\nVideo: `{vq}`\nffmpeg: `{ffmpeg_param}`")
 
 @bot.on_message(filters.command("join") & filters.create(on_channel))
 def join_chat_call(c, m):
     chat = m.chat.id
-    url = m.command[1]
+    try:
+        url = m.command[1]
+    except:
+        m.reply("Thiếu tham số", quote = True)
+        return 
     if len(m.command) > 2:
         url = m.command[2]
     if not url:
@@ -41,7 +70,11 @@ def join_chat_call(c, m):
 @bot.on_message(filters.command("broadcast") & filters.create(on_channel))
 def join_content_channel(c, m):
     chat = "contentdownload"
-    url = m.command[1]
+    try:
+        url = m.command[1]
+    except:
+        m.reply("Thiếu tham số", quote = True)
+        return 
     if len(m.command) > 2:
         url = m.command[2]
     if not url:
@@ -88,7 +121,11 @@ def change_volume(c, m):
 @bot.on_message(filters.command("play"))
 def play_requested_media(c, m):
     chat = m.chat.id
-    url = m.command[1]
+    try:
+        url = m.command[1]
+    except:
+        m.reply("Thiếu tham số", quote = True)
+        return 
     try:
         app.get_call(chat)
     except:
@@ -115,7 +152,11 @@ def play_requested_media(c, m):
 @bot.on_message(filters.command("cast")& filters.create(on_channel))
 def request_channel_cast(c, m):
     chat = "contentdownload"
-    url = m.command[1]
+    try:
+        url = m.command[1]
+    except:
+        m.reply("Thiếu tham số", quote = True)
+        return 
     try:
         app.get_call(chat)
     except:
