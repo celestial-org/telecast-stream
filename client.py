@@ -80,6 +80,7 @@ def join_content_channel(c, m):
         return 
     if not url:
         url = "https://vt.tiktok.com/ZSNob298M/"
+        m.command[1] = url
     if len(m.command) > 2:
         url = m.command[2]
     if not url:
