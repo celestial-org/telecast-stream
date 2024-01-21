@@ -5,6 +5,7 @@ import os, sys
 from init import api_id, api_hash, bot_token, session
 from custom import on_channel
 from api import get_video, get_audio
+import time
 
 app = PyTgCalls(Client("telecast", session_string=session))
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
@@ -145,7 +146,7 @@ def play_requested_media(c, m):
         media = url
     if m.command[1] == "content":
         media = "http://127.0.0.1:8080/content.mp4"
-    m.reply(f"**[{m.from_user.first_name}](tg://user?id={m.from_user.id})** đã gửi yêu cầu phát sóng [liên kết]({url})")
+    #m.reply(f"**[{m.from_user.first_name}](tg://user?id={m.from_user.id})** đã gửi yêu cầu phát sóng [liên kết]({url})")
     m.delete()
     app.change_stream(chat, stream(media))
     
