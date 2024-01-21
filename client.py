@@ -77,6 +77,8 @@ def join_content_channel(c, m):
     except:
         m.reply("Thiếu tham số", quote = True)
         return 
+    if not url:
+        url = "http://127.0.0.1:8080/content.mp4"
     if len(m.command) > 2:
         url = m.command[2]
     if not url:
