@@ -79,7 +79,7 @@ def join_content_channel(c, m):
     if not url:
         return
     if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
-        if m.command[1] == "music":
+        if url == "music":
             media = get_audio(url)
         else:
             media = get_video(url)
