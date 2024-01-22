@@ -11,7 +11,7 @@ app = PyTgCalls(Client("telecast", session_string=session))
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
 app.start()
 
-aq = 3000,1
+aq = 10000,1
 vq = 1920,1080,60
 ffmpeg_param = ""
 
