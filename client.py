@@ -55,7 +55,13 @@ def join_chat_call(c, m):
         if url == "music":
             media = get_audio(url)
         else:
-            media = get_video(url)
+            try:
+                if "tiktok" in url:
+                    media = ttlive(url)
+                else:
+                    raise
+            except:
+                media = get_video(url)
     else:
         media = url
     if url == "content":
@@ -82,7 +88,13 @@ def join_content_channel(c, m):
         if url == "music":
             media = get_audio(url)
         else:
-            media = get_video(url)
+            try:
+                if "tiktok" in url:
+                    media = ttlive(url)
+                else:
+                    raise
+            except:
+                media = get_video(url)
     else:
         media = url
     if url == "content":
@@ -139,7 +151,13 @@ def play_requested_media(c, m):
         if m.command[1] == "music":
             media = get_audio(url)
         else:
-            media = get_video(url)
+            try:
+                if "tiktok" in url:
+                    media = ttlive(url)
+                else:
+                    raise
+            except:
+                media = get_video(url)
     else:
         media = url
     if m.command[1] == "content":
@@ -170,7 +188,13 @@ def request_channel_cast(c, m):
         if m.command[1] == "music":
             media = get_audio(url)
         else:
-            media = get_video(url)
+            try:
+                if "tiktok" in url:
+                    media = ttlive(url)
+                else:
+                    raise
+            except:
+                media = get_video(url)
     else:
         media = url
     if m.command[1] == "content":
