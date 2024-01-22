@@ -4,7 +4,7 @@ from pytgcalls.types import MediaStream, AudioParameters, VideoParameters, Audio
 import os, sys
 from init import api_id, api_hash, bot_token, session
 from custom import on_channel
-from api import get_video, get_audio
+from api import get_video, get_audio, ttlive
 import time
 
 app = PyTgCalls(Client("telecast", session_string=session))
