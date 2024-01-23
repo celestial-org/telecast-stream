@@ -161,7 +161,7 @@ def play_requested_media(c, m):
     elif not url.startswith("http"):
         with open("channels.txt", "r") as f:
             channels = f.read().splitlines
-            media = (channel.split("=")[1] if m.command[1] == channel.split("=")[0] for channel in channels)
+            media = (channel.split("=")[1] if m.command[1] == channel.split("=")[0] else None for channel in channels)
             if not media:
                 m.reply("Không tìm thấy nội dung yêu cầu", quote=True)
                 return
