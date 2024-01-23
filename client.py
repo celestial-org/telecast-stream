@@ -222,7 +222,8 @@ def add_channel(c, m):
                     count += 1
                     f.write(str(m.command))
                     f.write("\n")
-            m.reply(f"Đã lưu {count}:\n{'\n'.join(saved)}")
+            saved = "\n".join(saved)
+            m.reply(f"Đã lưu {count}:\n{saved}")
             return
     m.reply("Không đủ tham số")
             
