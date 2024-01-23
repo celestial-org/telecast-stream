@@ -212,7 +212,7 @@ def request_channel_cast(c, m):
     
 @bot.on_message(filters.command("addchannel"))
 def add_channel(c, m):
-    if len(m.command) > 2:
+    if len(m.command) >= 2:
         for channel in m.command:
             saved = []
             count = 0
