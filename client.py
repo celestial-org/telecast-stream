@@ -218,9 +218,9 @@ def add_channel(c, m):
             count = 0
             if "=" in channel:
                 with open("channels.txt", "a") as f:
-                    saved.append(m.command.split("=")[0])
+                    saved.append(channel.split("=")[0])
                     count += 1
-                    f.write(m.command)
+                    f.write(channel)
                     f.write("\n")
             saved = "\n".join(saved)
             m.reply(f"Đã lưu {count}:\n{saved}")
