@@ -6,6 +6,7 @@ from init import api_id, api_hash, bot_token, session
 from custom import on_channel
 from api import get_video, get_audio, ttlive
 import time
+import json
 
 app = PyTgCalls(Client("telecast", session_string=session))
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
@@ -148,10 +149,10 @@ def play_requested_media(c, m):
         m.reply("Không tìm thấy nội dung", quote=True)
         return
     if not url.startswith("http"):
-        with open("channels.txt", "r") as f:
-            for channel in f.read().splitlines():
-                if channel.split("=")[0] == url:
-                    url = channel.split("=")[1]
+        with open("channels.json", "r") as f:
+            for channel in json.loads(f.read()):
+                if channel[0] == url:
+                    url = channel[1]
                     break
             if not url:
                 m.reply("Không tìm thấy nội dung yêu cầu", quote=True)
@@ -217,11 +218,17 @@ def add_channel(c, m):
         count = 0
         for channel in m.command:
             if "=" in channel:
-                with open("channels.txt", "a") as f:
-                    saved.append(channel.split("=")[0])
-                    count += 1
-                    f.write(channel)
-                    f.write("\n")
+                try:
+                    with open("channels.json", "r") as f:
+                        channels = json.loads(f.read())
+                except:
+                    channels = []
+                channel = [channel.split("=")[0], channel.split("=")[1]]
+                channels.append( channel)
+                count += 1
+                saved.append(channel.split("=")[0])
+                with open("channels.json", "w") as file:
+                    json.dump(channels, file)
         saved = "\n".join(saved)
         m.reply(f"Đã lưu {count}:\n{saved}")
         return
@@ -230,8 +237,10 @@ def add_channel(c, m):
 @bot.on_message(filters.command("channels"))
 def channels_list(c, m):
     try:
-        with open("channels.txt", "r") as f:
-            m.reply(f.read(), quote=True)
+        with open("channels.json", "r") as f:
+            channels = json.loads(f.read())
+            channels = "\n".join(channels)
+            m.reply(channels, quote=True)
     except:
         m.reply("Tài nguyên không có sẵn", quote=True)
     
