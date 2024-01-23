@@ -213,20 +213,27 @@ def request_channel_cast(c, m):
 @bot.on_message(filters.command("addchannel"))
 def add_channel(c, m):
     if len(m.command) >= 2:
+        saved = []
+        count = 0
         for channel in m.command:
-            saved = []
-            count = 0
             if "=" in channel:
                 with open("channels.txt", "a") as f:
                     saved.append(channel.split("=")[0])
                     count += 1
                     f.write(channel)
                     f.write("\n")
-            saved = "\n".join(saved)
-            m.reply(f"Đã lưu {count}:\n{saved}")
-            return
+        saved = "\n".join(saved)
+        m.reply(f"Đã lưu {count}:\n{saved}")
+        return
     m.reply("Không đủ tham số")
             
+@bot.on_message(filters.comman("channels"))
+def channels_list(c, m):
+    try:
+        with open("channels.txt", "r") as f:
+            m.reply(f.read(), quote=True)
+    except:
+        m.reply("Tài nguyên không có sẵn", quote=True)
     
 bot.start()
 idle()
