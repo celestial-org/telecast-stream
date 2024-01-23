@@ -147,6 +147,15 @@ def play_requested_media(c, m):
     if not url:
         m.reply("Không tìm thấy nội dung", quote=True)
         return
+    if not url.startswith("http"):
+        with open("channels.txt", "r") as f:
+            for channel in f.read().splitlines():
+                if channel.split("=")[0] == url:
+                    url = channel.split("=")[1]
+                    break
+            if not url:
+                m.reply("Không tìm thấy nội dung yêu cầu", quote=True)
+                return
     if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
         if m.command[1] == "music":
             media = get_audio(url)
@@ -158,19 +167,8 @@ def play_requested_media(c, m):
                     raise
             except:
                 media = get_video(url)
-    elif not url.startswith("http"):
-        with open("channels.txt", "r") as f:
-            for channel in f.read().splitlines():
-                if channel.split("=")[0] == url:
-                    media = channel.split("=")[1]
-                    break
-            if not media:
-                m.reply("Không tìm thấy nội dung yêu cầu", quote=True)
-                return
     else:
         media = url
-    if m.command[1] == "content":
-        media = "http://127.0.0.1:8080/content.mp4"
     #m.reply(f"**[{m.from_user.first_name}](tg://user?id={m.from_user.id})** đã gửi yêu cầu phát sóng [liên kết]({url})")
     m.delete()
     app.change_stream(chat, stream(media))
