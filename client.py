@@ -160,7 +160,7 @@ def play_requested_media(c, m):
                 media = get_video(url)
     elif not url.startswith("http"):
         with open("channels.txt", "r") as f:
-            for channel in f.read().splitlines:
+            for channel in f.read().splitlines():
                 if channel.split("=")[0] == url:
                     media = channel.split("=")[1]
                     break
