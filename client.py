@@ -227,7 +227,7 @@ def add_channel(c, m):
         return
     m.reply("Không đủ tham số")
             
-@bot.on_message(filters.comman("channels"))
+@bot.on_message(filters.command("channels"))
 def channels_list(c, m):
     try:
         with open("channels.txt", "r") as f:
