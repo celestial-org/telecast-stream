@@ -203,6 +203,22 @@ def request_channel_cast(c, m):
     m.delete()
     app.change_stream(chat, stream(media))
     
+@bot.on_message(filters.command("addchannel"))
+def add_channel(c, m):
+    if len(m.command) > 2:
+        for channel in m.command:
+            saved = []
+            count = 0
+            if "=" in channel:
+                with open("channels.txt", "a") as f:
+                    saved.append(m.command.split("=")[0])
+                    count += 1
+                    f.write(str(m.command))
+                    f.write("\n")
+            m.reply(f"Đã lưu {count}:\n{'\n'.join(saved)}")
+            return
+    m.reply("Không đủ tham số")
+            
     
 bot.start()
 idle()
