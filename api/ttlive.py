@@ -11,4 +11,4 @@ def ttlive(url):
     json_ = json_["LiveRoomMobile"]
     json_ = json_["userInfo"]["liveRoom"]["streamData"]["pull_data"]["stream_data"]
     json_ = json.loads(json_)["data"]["origin"]["main"]
-    return json_["flv"]
+    return json_["hls"]
