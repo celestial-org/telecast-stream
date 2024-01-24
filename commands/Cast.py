@@ -64,3 +64,14 @@ def add_to_album(c, m):
     add_media(f"Bộ sưu tập của {name}", [pre,link])
     m.reply(f"Đã thêm vào bộ sưu tập của --**{name}**--")
     m.delete()
+    
+@Client.on_message(filters.command("dellist"))
+def delete_from_album(c, m):
+    if m.sender_chat:
+        m.reply("Album chỉ khả dụng cho tài khoản người dùng")
+        return
+    name = m.from_user.first_name
+    pre = m.command[1]
+    del_media(f"Bộ sưu tập của {name}", pre)
+    m.reply(f"Đã xoá {pre} khỏi bộ sưu tập của {name}")
+    m.delete()
