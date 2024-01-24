@@ -31,7 +31,7 @@ def play_media_queue(c, m):
         user = m.from_user.first_name
     except:
         user = m.sender_chat.title
-    st = m.reply(f"--**{user}**-- đã gửi yêu cầu phát __{link}__")
+    st = m.reply(f"--**{user}**-- đã gửi yêu cầu phát __{link}__\nNội dung sẽ được phát sau 1 phút nữa.\nThêm vào bộ sưu tập sẽ có thể phát nhanh hơn")
     time.sleep(60)
     st.delete()
     play(chat, link)
