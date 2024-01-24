@@ -15,7 +15,7 @@ def join_chat_call(c, m):
         m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
     m.delete()
     
-@Client.on_message(filters.command("end") & on_channel)
+@Client.on_message(filters.command("end") & filters.create(on_channel))
 def leave_chat_call(c, m):
     leave(m.chat.id)
     m.reply("--**Chương trình đã kết thúc**--")
