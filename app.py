@@ -12,11 +12,12 @@ def stream(media):
     vq = os.getenv("VIDEO_QUAL")
     aq = tuple(map(int, aq.split(',')))
     vq = tuple(map(int, vq.split(',')))
+    ffmpeg = os.getenv("FFMPEG")
     return MediaStream(
         media,
         audio_parameters=AudioParameters(*aq), 
         video_parameters=VideoParameters(*vq), 
-        additional_ffmpeg_parameters=ffmpeg_param)
+        additional_ffmpeg_parameters=ffmpeg)
 
 def join(chat, media):
     app.join_group_call(chat, stream(media))
