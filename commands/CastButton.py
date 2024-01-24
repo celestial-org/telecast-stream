@@ -17,4 +17,4 @@ def on_callback_query_handle(c, q):
             q.answer(f"Bắt đầu phát {media}")
             play(chat, data)
         except:
-            q.answer("Không tìm thấy tài nguyên")
+            q.answer("Có vấn đề xảy ra")
