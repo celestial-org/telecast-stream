@@ -8,11 +8,10 @@ def on_callback_query_handle(c, q):
     data = q.data
     m = q.message
     if data == "albums-button":
-        m.edit_reply_markup(albums())
+        m.edit("Danh sách bộ sưu tập", reply_markup=albums())
     elif data.startswith("album:"):
         data = data.replace("album:", "")
-        m.edit_reply_markup(album(data))
-        m.edit(data)
+        m.edit(data, reply_markup=album(data))
     else:
         try:
             chat = m.chat.id
