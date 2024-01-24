@@ -2,8 +2,6 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from more_itertools import chunked
 import os, shelve
 
-db = shelve.open("channels.db")
-
 def albums():
     albums_list = os.listdir("albums")
     chunked_keys = list(chunked(albums_list, 1))
