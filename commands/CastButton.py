@@ -12,10 +12,11 @@ def on_callback_query_handle(c, q):
     elif data.startswith("album:"):
         data = data.replace("album:", "")
         m.edit(data, reply_markup=album(data))
-    elif data.startswith("http"):
+    else:
         try:
             chat = m.chat.id
-            q.answer(f"Bắt đầu phát {media}")
-            play(chat, data)
+            q.answer(f"Bắt đầu phát {data}")
+            media = get_media(data)
+            play(chat, media)
         except:
             q.answer("Có vấn đề xảy ra")
