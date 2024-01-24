@@ -1,0 +1,28 @@
+from pytgcalls import PyTgCalls
+from pyrogram import Client
+from pytgcalls.types import MediaStream, AudioParameters, VideoParameters, AudioQuality, VideoQuality
+from init import api_id, api_hash, bot_token, session
+import os
+
+app = PyTgCalls(Client("telecast", session_string=session))
+app.start()
+
+def stream(media):
+    aq = os.getenv("AUDIO_QUAL")
+    vq = os.getenv("VIDEO_QUAL")
+    aq = tuple(map(int, aq.split(',')))
+    vq = tuple(map(int, vq.split(',')))
+    return MediaStream(
+        media,
+        audio_parameters=AudioParameters(*aq), 
+        video_parameters=VideoParameters(*vq), 
+        additional_ffmpeg_parameters=ffmpeg_param)
+
+def join(chat, media):
+    app.join_group_call(chat, stream(media))
+    
+def leave(chat):
+    app.leave_group_call(chat,)
+    
+def play(chat, media):
+    app.change_stream(chat, stream(media))
