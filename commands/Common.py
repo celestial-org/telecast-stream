@@ -16,5 +16,5 @@ def set_stream_quality(c, m):
         pass
     aq = os.getenv("AUDIO_QUAL")
     vq = os.getenv("VIDEO_QUAL")
-    ffmpeg = on.getenv("FFMPEG")
+    ffmpeg = os.getenv("FFMPEG")
     m.reply(f"Thông tin cài đặt:\nAudio: `{aq}`\nVideo: `{vq}`\nffmpeg: `{ffmpeg}`")
