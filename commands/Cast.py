@@ -80,3 +80,13 @@ def delete_from_album(c, m):
     del_media(f"Bộ sưu tập của {name}", pre)
     m.reply(f"Đã xoá {pre} khỏi bộ sưu tập của {name}")
     m.delete()
+    
+@Client.on_message(filters.command("playlist") & filters.create(on_channel))
+def get_album_of(c, m):
+    name = m.reply_to_message.from_user.first_name
+    try:
+        album = album(name)
+        m.reply(f"Bộ sưu tập của --**{name}**--", quote=True, reply_markup=album)
+        m.delete()
+    except:
+        m.reply(f"--**{name}**-- không có bộ sưu tập", quote=True)
