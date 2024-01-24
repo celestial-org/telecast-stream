@@ -12,7 +12,10 @@ def albums():
     return InlineKeyboardMarkup(album)
 
 def album(name):
-    db = shelve.open(f"albums/{name}.album")
+    if name.endswith(".album"):
+        db = shelve.open(f"albums/{name}")
+    else:
+        db = shelve.open(f"albums/{name}.album")
     allkeys = list(db.keys())
     chunked_keys = list(chunked(allkeys, 3))
     album = []
