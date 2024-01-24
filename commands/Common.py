@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from more_itertools import chunked
-import os, shelve
+import os
 
 @Client.on_message(filters.command("setting"))
 def set_stream_quality(c, m):
