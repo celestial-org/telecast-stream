@@ -1,7 +1,5 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from api import get_video, get_audio, ttlive
-from app import join, play, leave
 from more_itertools import chunked
 import os, shelve
 
@@ -23,31 +21,3 @@ def set_stream_quality(c, m):
     vq = os.getenv("VIDEO_QUAL")
     ffmpeg = on.getenv("FFMPEG")
     m.reply(f"Thông tin cài đặt:\nAudio: `{aq}`\nVideo: `{vq}`\nffmpeg: `{ffmpeg}`")
-    
-@bot.on_message(filters.command("join"))
-def join_chat_call(c, m):
-    chat = m.chat.id
-    try:
-        allkeys = list(db.keys())
-        chunked_keys = list(chunked(allkeys, 3))
-        playlist = []
-        for chunk in chunked_keys:
-            row_buttons = [InlineKeyboardButton(pre, callback_data=pre) for pre in chunk]
-            playlist.appen
-        m.reply(f"Đã bắt đầu phát sóng", reply_markup=InlineKeyboardMarkup(playlist))
-        join(chat)
-    except Exception as e:
-        print(e)
-        m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
-    m.delete()
-    
-@Client.on_message(filters.command("addmedia"))
-def add_channel(c, m):
-    if len(m.command) > 2:
-        pre = m.command[1]
-        link = m.command[2]
-        db[pre] = link
-        m.reply(f"Đã thêm __{pre}__", quote=True)
-        m.delete()
-    else:
-        m.reply("Thiếu tham số cần thiết", quote=True)
