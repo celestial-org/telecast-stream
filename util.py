@@ -19,7 +19,7 @@ def album(name):
     for chunk in chunked_keys:
         row_buttons = [InlineKeyboardButton(pre, callback_data=pre) for pre in chunk]
         album.append(row_buttons)
-    album.append([InlineKeyboardButton("Quay lại bộ sưu tập", callback_data="back-button"))
+    album.append([InlineKeyboardButton("Xem danh sách album", callback_data="albums-button"))
     return InlineKeyboardMarkup(album)
     
 def add_media(name, media):
