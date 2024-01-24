@@ -66,6 +66,9 @@ def add_to_album(c, m):
     name = m.from_user.first_name
     pre = m.command[1]
     link = m.command[2]
+    if not link.startswith("http"):
+        m.reply("Liên kết không hợp lệ", quote=True)
+        return
     if m.from_user.id == 5665225938:
         add_media("Telecast", [pre,link])
         m.reply(f"Đã thêm __{pre}__")
