@@ -14,7 +14,7 @@ def albums():
     return InlineKeyboardMarkup(album)
 
 def album(name):
-    db = shelve.open(f"albums/Bộ sưu tập của {name}.pl")
+    db = shelve.open(f"albums/{name}.album")
     allkeys = list(db.keys())
     chunked_keys = list(chunked(allkeys, 3))
     album = []
@@ -25,13 +25,13 @@ def album(name):
     return InlineKeyboardMarkup(album)
     
 def add_media(name, media):
-    db = shelve.open(f"albums/Bộ sưu tập của {name}.pl")
+    db = shelve.open(f"albums/{name}.album")
     db[media[0]]=media[1]
     
 def del_media(name, media):
-    db = shelve.open(f"albums/Bộ sưu tập của {name}.pl")
+    db = shelve.open(f"albums/{name}.album")
     del db[media]
     
 def get_media(name, media):
-    db = shelve.open(f"albums/Bộ sưu tập của {name}.pl")
+    db = shelve.open(f"albums/{name}.album")
     return db[media]
