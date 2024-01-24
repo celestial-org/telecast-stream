@@ -36,10 +36,10 @@ def play(chat, media):
             media = get_audio(media)
         else:
             try:
-                if "tiktok" in url:
-                    media = ttlive(url)
+                if "tiktok" in media:
+                    media = ttlive(media)
                 else:
                     raise
             except:
-                media = get_video(url)
+                media = get_video(media)
     app.change_stream(chat, stream(media))
