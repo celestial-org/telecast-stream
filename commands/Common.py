@@ -3,8 +3,6 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from more_itertools import chunked
 import os, shelve
 
-db = shelve.open("channels.db")
-
 @Client.on_message(filters.command("setting"))
 def set_stream_quality(c, m):
     try:
