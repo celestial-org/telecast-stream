@@ -236,8 +236,6 @@ def switch_play(c, cq):
     print(cq)
     pre = cq.data
     url = db[pre]
-    if not url.startswith("http"):
-        url = db[url]
     if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
         try:
             if "tiktok" in url:
