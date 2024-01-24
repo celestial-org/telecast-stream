@@ -15,17 +15,14 @@ def albums():
     return InlineKeyboardMarkup(albums)
 
 def album(name):
-    if name.endswith(".album"):
-        db = shelve.open(f"albums/{name}")
-    else:
-        db = shelve.open(f"albums/{name}.album")
+    db = shelve.open(f"albums/{name}.album")
     allkeys = list(db.keys())
     if not allkeys:
         return InlineKeyboardMarkup([[InlineKeyboardButton("Xem danh sách album", callback_data="albums-button")]])
     chunked_keys = list(chunked(allkeys, 3))
     album = []
     for chunk in chunked_keys:
-        row_buttons = [InlineKeyboardButton(pre, callback_data=pre) for pre in chunk]
+        row_buttons = [InlineKeyboardButton(pre, callback_data=f"{name}:{pre}") for pre in chunk]
         album.append(row_buttons)
     album.append([InlineKeyboardButton("Xem danh sách album", callback_data="albums-button")])
     return InlineKeyboardMarkup(album)
