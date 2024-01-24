@@ -2,7 +2,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from api import get_video, get_audio, ttlive
 from app import join, play, leave
-from util import albums, album
+from util import albums, album, add_media, del_media, get_media
 from custom import on_channel
 
 
@@ -47,8 +47,20 @@ def get_album(c, m):
         m.reply(f"Bộ sưu tập của --**{name}**--", quote=True, reply_markup=album)
         m.delete()
     except:
-        m.reply(f"--**{name}**-- không có bộ sưu tập, hãy bắt đầu bằng lệnh /addsong + tiêu đề + link đa phương tiện", quote=True)
+        m.reply(f"--**{name}**-- không có bộ sưu tập, hãy bắt đầu bằng lệnh /addlist + tiêu đề + link đa phương tiện", quote=True)
     
 @Client.on_message(filters.command("albums"))
 def all_albums(c, m):
     m.reply("Tất cả bộ sưu tập", reply_markup=albums())
+    
+@Client.on_message(filters.command("addlist"))
+def add_to_album(c, m):
+    if m.sender_chat:
+        m.reply("Album chỉ khả dụng cho tài khoản người dùng")
+        return
+    name = m.from_user.first_name
+    pre = m.command[1]
+    link = m.command[2]
+    add_media(f"Bộ sưu tập của {name}", [pre,link])
+    m.reply(f"Đã thêm vào bộ sưu tập của --**{name}**--")
+    m.delete()
