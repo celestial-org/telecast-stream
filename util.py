@@ -22,7 +22,7 @@ def album(name):
     chunked_keys = list(chunked(allkeys, 3))
     album = []
     for chunk in chunked_keys:
-        row_buttons = [InlineKeyboardButton(pre, callback_data=pre) for pre in chunk]
+        row_buttons = [InlineKeyboardButton(pre, callback_data=db[pre]) for pre in chunk]
         album.append(row_buttons)
     album.append([InlineKeyboardButton("Xem danh sách album", callback_data="albums-button")])
     return InlineKeyboardMarkup(album)
