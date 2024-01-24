@@ -7,7 +7,7 @@ db = shelve.open("channels.db")
 def 
 
 def playlist():
-    db = shelve.open("channels.db")
+    db = shelve.open("album/channels.db")
     allkeys = list(db.keys())
     chunked_keys = list(chunked(allkeys, 3))
     playlist = []
