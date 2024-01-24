@@ -1,7 +1,7 @@
 from pytgcalls import PyTgCalls
 from pyrogram import Client
 from pytgcalls.types import MediaStream, AudioParameters, VideoParameters
-from init import api_id, api_hash, bot_token, session
+from init import session
 import os
 
 app = PyTgCalls(Client("telecast", session_string=session))
