@@ -5,7 +5,7 @@ import os, shelve
 def albums():
     albums_list = os.listdir("albums")
     if not albums_list:
-        return InlineKeyboardMarkup([[InlineKeyboardButton("Không có bộ sưu tập nào cả", url="https://www.google.com")]])
+        return InlineKeyboardMarkup([[InlineKeyboardButton("Không có bộ sưu tập nào cả", url="https://www.google.com")], [InlineKeyboardButton("Xem danh sách album", callback_data="albums-button")]])
     albums_list = [album.replace(".album", "") for album in albums_list if album.endswith(".album")]
     chunked_keys = list(chunked(albums_list, 1))
     albums = []
@@ -21,7 +21,7 @@ def album(name):
         db = shelve.open(f"albums/{name}.album")
     allkeys = list(db.keys())
     if not allkeys:
-        return InlineKeyboardMarkup([[InlineKeyboardButton("Không có gì trong bộ sưu tập này", url="https://www.google.com")]])
+        return InlineKeyboardMarkup([[InlineKeyboardButton("Không có gì trong bộ sưu tập này", url="https://www.google.com")], [InlineKeyboardButton("Xem danh sách album", callback_data="albums-button")]])
     chunked_keys = list(chunked(allkeys, 3))
     album = []
     for chunk in chunked_keys:
