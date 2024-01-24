@@ -235,7 +235,19 @@ def channels_list(c, m):
 def switch_play(c, cq):
     print(cq)
     pre = cq.data
-    link = db[pre]
+    url = db[pre]
+    if not url.startswith("http"):
+        url = db[url]
+    if any(pre in url for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
+        try:
+            if "tiktok" in url:
+                media = ttlive(url)
+            else:
+                raise
+        except:
+            media = get_video(url)
+    else:
+        media = url
     cq.answer(f"Bắt đầu phát kênh {pre}")
     chat = cq.message.chat.id
     app.change_stream(chat, stream(media))
