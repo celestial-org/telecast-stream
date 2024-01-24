@@ -6,6 +6,7 @@ def albums():
     albums_list = os.listdir("albums")
     if not albums_list:
         return InlineKeyboardMarkup([[InlineKeyboardButton("Không có bộ sưu tập nào cả", url="https://www.google.com")]])
+    albums_list = [album.replace(".album", "") for album in albums_list if album.endswith(".album")]
     chunked_keys = list(chunked(albums_list, 1))
     albums = []
     for chunk in chunked_keys:
