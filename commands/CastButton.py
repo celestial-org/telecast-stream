@@ -18,6 +18,6 @@ def on_callback_query_handle(c, q):
         try:
             chat = m.chat.id
             q.answer(f"Bắt đầu phát {data}")
-            play(chat, data)
+            play(chat, f"media:{data}")
         except:
             q.answer("Có vấn đề xảy ra")
