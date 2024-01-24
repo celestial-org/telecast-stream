@@ -6,3 +6,4 @@ tgcrypto
 deta
 yt_dlp
 bs4
+replit
