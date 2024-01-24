@@ -13,10 +13,8 @@ def on_callback_query_handle(c, q):
         m.edit_reply_markup(album(data))
     else:
         try:
-            data = json.loads(data)
-            chat = data["chat"]
-            media = data["media"]
+            chat = m.chat.id
             q.answer(f"Bắt đầu phát {media}")
-            play(chat, media)
+            play(chat, data)
         except:
             q.answer("Không tìm thấy tài nguyên")
