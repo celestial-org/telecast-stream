@@ -44,8 +44,11 @@ def get_album(c, m):
     name = m.from_user.first_name
     try:
         album = album(name)
-        m.reply(f"Bộ sưu tập của --**{name}**--", quote=True)
+        m.reply(f"Bộ sưu tập của --**{name}**--", quote=True, reply_markup=album)
         m.delete()
     except:
         m.reply(f"--**{name}**-- không có bộ sưu tập, hãy bắt đầu bằng lệnh /addsong + tiêu đề + link đa phương tiện", quote=True)
     
+@Client.on_message(filters.command("albums"))
+def all_albums(c, m):
+    m.reply("Tất cả bộ sưu tập", reply_markup=albums())
