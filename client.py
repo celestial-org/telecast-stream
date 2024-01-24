@@ -234,7 +234,7 @@ def channels_list(c, m):
 @bot.on_callback_query()
 def switch_play(c, cq):
     print(cq)
-    pre = cq.content
+    pre = cq.data
     link = db[pre]
     cq.answer(f"Bắt đầu phát kênh {pre}")
     chat = cq.message.chat.id
