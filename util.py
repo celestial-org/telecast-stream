@@ -3,7 +3,11 @@ from more_itertools import chunked
 import os, shelve
 
 db = shelve.open("channels.db")
+
+def 
+
 def playlist():
+    db = shelve.open("channels.db")
     allkeys = list(db.keys())
     chunked_keys = list(chunked(allkeys, 3))
     playlist = []
