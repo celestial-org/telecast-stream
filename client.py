@@ -1,6 +1,7 @@
 from pyrogram import Client, filters, idle
 from pytgcalls import PyTgCalls
 from pytgcalls.types import MediaStream, AudioParameters, VideoParameters, AudioQuality, VideoQuality
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import os, sys
 from init import api_id, api_hash, bot_token, session
 from custom import on_channel
@@ -206,7 +207,7 @@ def request_channel_cast(c, m):
     m.delete()
     app.change_stream(chat, stream(media))
     
-@bot.on_message(filters.command("addpre"))
+@bot.on_message(filters.command("addplay"))
 def add_channel(c, m):
     if len(m.command) > 2:
         pre = m.command[1]
@@ -216,12 +217,12 @@ def add_channel(c, m):
     else:
         m.reply("Thiếu tham số cần thiết", quote=True)
             
-@bot.on_message(filters.command("allpre"))
+@bot.on_message(filters.command("playlist"))
 def channels_list(c, m):
     try:
         allpre = list(db.keys())
-        allpre = "\n".join(allpre)
-        m.reply(f"```list\n{allpre}\n```Dùng lệnh /play + `tên lênh` để phát kênh tương ứng", quote=True)
+        playlist = InlineKeyboardMarkup[[InlineK]]
+        m.reply(f"__--**Playlist**--__", quote=True, reply_markup=)
     except:
         m.reply("Tài nguyên không có sẵn", quote=True)
     
