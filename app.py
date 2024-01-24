@@ -42,4 +42,4 @@ def play(chat, media):
                     raise
             except:
                 media = get_video(url)
-    app.change_stream(chat, stream(media))
+    app.change_stream(chat, stream(media),)
