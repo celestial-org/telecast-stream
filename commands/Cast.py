@@ -1,5 +1,4 @@
 from pyrogram import Client, filters
-from api import get_video, get_audio, ttlive
 from app import join, play, leave
 from util import albums, album, add_media, del_media, get_media
 from custom import on_channel
