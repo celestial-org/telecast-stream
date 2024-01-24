@@ -2,7 +2,7 @@ from pyrogram import Client, filters
 from app import join, play, leave
 from util import albums, album, add_media, del_media, get_media
 from custom import on_channel
-
+import time
 
 @Client.on_message(filters.command("join"))
 def join_chat_call(c, m):
