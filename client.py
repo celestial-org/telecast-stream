@@ -5,9 +5,11 @@ import os, sys
 from init import api_id, api_hash, bot_token, session
 from custom import on_channel
 from api import get_video, get_audio, ttlive
+import shelve
 import time
 import json
 
+db = shelve.open("channels.db")
 app = PyTgCalls(Client("telecast", session_string=session))
 bot = Client("Bot", api_id, api_hash, bot_token=bot_token, in_memory=True)
 app.start()
@@ -213,26 +215,13 @@ def request_channel_cast(c, m):
     
 @bot.on_message(filters.command("addchannel"))
 def add_channel(c, m):
-    if len(m.command) >= 2:
-        saved = []
-        count = 0
-        for channel in m.command:
-            if "=" in channel:
-                try:
-                    with open("channels.json", "r") as f:
-                        channels = json.loads(f.read())
-                except:
-                    channels = []
-                channel = [channel.split("=")[0], channel.split("=")[1]]
-                channels.append( channel)
-                count += 1
-                saved.append(channel.split("=")[0])
-                with open("channels.json", "w") as file:
-                    json.dump(channels, file)
-        saved = "\n".join(saved)
-        m.reply(f"Đã lưu {count}:\n{saved}")
-        return
-    m.reply("Không đủ tham số")
+    if len(m.command) > 2:
+        pre = m.command[1]
+        link = m.command[2]
+        db[pre] = link
+        m.reply(f"Đã thêm __{pre}__", quote=True)
+    else:
+        m.reply("Thiếu tham số cần thiết", quote=True)
             
 @bot.on_message(filters.command("channels"))
 def channels_list(c, m):
