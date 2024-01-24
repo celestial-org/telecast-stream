@@ -19,7 +19,8 @@ def stream(media):
         video_parameters=VideoParameters(*vq), 
         additional_ffmpeg_parameters=ffmpeg)
 
-def join(chat, media):
+def join(chat):
+    media = "https://youtu.be/5zsBVm4qK_A?si=YeNGaxega00-NmEu"
     app.join_group_call(chat, stream(media))
     
 def leave(chat):
