@@ -10,6 +10,7 @@ def on_callback_query_handle(c, q):
     if data == "albums-button":
         m.edit_reply_markup(albums())
     elif data.startswith("album:"):
+        data = data.replace("album:", "")
         m.edit_reply_markup(album(data))
         m.edit(data)
     else:
