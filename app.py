@@ -30,6 +30,7 @@ def leave(chat):
 def play(chat, media):
     if "media:" in media:
         media = media.replace("media:", "")
+        media = get_media(media)
     if any(pre in media for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
         if media.startswith("music:"):
             media = media.replace("music:", "")
