@@ -9,7 +9,7 @@ def albums():
     for chunk in chunked_keys:
         row_buttons = [InlineKeyboardButton(pre, callback_data=pre) for pre in chunk]
         albums.append(row_buttons)
-    return InlineKeyboardMarkup(album)
+    return InlineKeyboardMarkup(albums)
 
 def album(name):
     if name.endswith(".album"):
