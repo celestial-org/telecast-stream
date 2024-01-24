@@ -28,10 +28,15 @@ def leave(chat):
     
 def play(chat, media):
     if any(pre in media for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
-        media = get_video(url)
-        if "tiktok" in url:
+        if media.startswith("music:"):
+            media = media.replace("music:", "")
+            media = get_audio(media)
+        else:
             try:
-                media = ttlive(url)
+                if "tiktok" in url:
+                    media = ttlive(url)
+                else:
+                    raise
             except:
-                pass
+                media = get_video(url)
     app.change_stream(chat, stream(media))
