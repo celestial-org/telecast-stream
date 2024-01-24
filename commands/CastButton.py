@@ -11,6 +11,7 @@ def on_callback_query_handle(c, q):
         m.edit_reply_markup(albums())
     elif not data.startswith("http"):
         m.edit_reply_markup(album(data))
+        m.edit(data)
     else:
         try:
             chat = m.chat.id
