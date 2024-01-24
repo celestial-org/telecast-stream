@@ -6,6 +6,7 @@ import os, sys
 from init import api_id, api_hash, bot_token, session
 from custom import on_channel
 from api import get_video, get_audio, ttlive
+from more_itertools import chunked
 import shelve
 import time
 import json
@@ -221,10 +222,23 @@ def add_channel(c, m):
 def channels_list(c, m):
     try:
         allpre = list(db.keys())
-        playlist = InlineKeyboardMarkup[[InlineK]]
-        m.reply(f"__--**Playlist**--__", quote=True, reply_markup=)
+        chunked_keys = list(chunked(allpre, 6))
+        playlist = []
+        for chunk in chunked_keys:
+            row_buttons = [InlineKeyboardButton(pre, callback_data=pre) for pre in chunk]
+            playlist.append(row_buttons)
+        m.reply(f"__--**Playlist**--__", quote=True, reply_markup=InlineKeyboardMarkup(playlist))
     except:
         m.reply("Tài nguyên không có sẵn", quote=True)
+    
+@bot.on_callback__query()
+def switch_play(c, cq):
+    print(cq)
+    pre = cq.content
+    link = db[pre]
+    cq.answer(f"Bắt đầu phát kênh {pre}")
+    chat = cq.message.chat.id
+    app.change_stream(chat, stream(media))
     
 bot.start()
 idle()
