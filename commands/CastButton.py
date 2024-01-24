@@ -9,7 +9,7 @@ def on_callback_query_handle(c, q):
     m = q.message
     if data == "albums-button":
         m.edit_reply_markup(albums())
-    if data.endswith(".album"):
+    elif not data.startswith("http"):
         m.edit_reply_markup(album(data))
     else:
         try:
