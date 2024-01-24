@@ -3,6 +3,7 @@ from pyrogram import Client
 from pytgcalls.types import MediaStream, AudioParameters, VideoParameters
 from init import session
 from api import get_video, get_audio, ttlive
+from util import get_media
 import os
 
 app = PyTgCalls(Client("telecast", session_string=session))
@@ -27,6 +28,8 @@ def leave(chat):
     app.leave_group_call(chat,)
     
 def play(chat, media):
+    if "media:" in media:
+        media = media.replace("media:", "")
     if any(pre in media for pre in ["youtube", "youtu.be", "soundcloud", "bilibili", "tiktok", "zing"]):
         if media.startswith("music:"):
             media = media.replace("music:", "")
