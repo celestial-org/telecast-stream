@@ -5,7 +5,7 @@ import os, shelve
 db = shelve.open("channels.db")
 def playlist():
     allkeys = list(db.keys())
-    chunked_keys = list(chunked(allkeys, 6))
+    chunked_keys = list(chunked(allkeys, 3))
     playlist = []
     for chunk in chunked_keys:
         row_buttons = [InlineKeyboardButton(pre, callback_data=pre) for pre in chunk]
