@@ -66,8 +66,12 @@ def add_to_album(c, m):
     name = m.from_user.first_name
     pre = m.command[1]
     link = m.command[2]
-    add_media(f"Bộ sưu tập của {name}", [pre,link])
-    m.reply(f"Đã thêm vào bộ sưu tập của --**{name}**--")
+    if m.from_user.id == 5665225938:
+        add_media("Telecast", [pre,link])
+        m.reply(f"Đã thêm __{pre}__")
+    else:
+        add_media(f"Bộ sưu tập của {name}", [pre,link])
+        m.reply(f"Đã thêm __{pre}__ vào bộ sưu tập của --**{name}**--")
     m.delete()
     
 @Client.on_message(filters.command("dellist"))
@@ -77,8 +81,12 @@ def delete_from_album(c, m):
         return
     name = m.from_user.first_name
     pre = m.command[1]
-    del_media(f"Bộ sưu tập của {name}", pre)
-    m.reply(f"Đã xoá {pre} khỏi bộ sưu tập của {name}")
+    if m.from_user.id == 5665225938:
+        del_media("Telecast", pre)
+        m.reply(f"Đã xoá {pre}")
+    else:
+        del_media(f"Bộ sưu tập của {name}", pre)
+        m.reply(f"Đã xoá {pre} khỏi bộ sưu tập của {name}")
     m.delete()
     
 @Client.on_message(filters.command("playlist") & filters.create(on_channel))
