@@ -5,7 +5,7 @@ import os, shelve
 db = shelve.open("channels.db")
 
 def albums():
-    albums_list = os.listdir("album")
+    albums_list = os.listdir("albums")
     chunked_keys = list(chunked(albums_list, 1))
     albums = []
     for chunk in chunked_keys:
@@ -14,7 +14,7 @@ def albums():
     return InlineKeyboardMarkup(album)
 
 def album(name):
-    db = shelve.open(f"album/Bộ sưu tập của {name}.pl")
+    db = shelve.open(f"albums/Bộ sưu tập của {name}.pl")
     allkeys = list(db.keys())
     chunked_keys = list(chunked(allkeys, 3))
     album = []
@@ -24,10 +24,10 @@ def album(name):
     return InlineKeyboardMarkup(album)
     
 def add_media(name, media):
-    db = shelve.open(f"album/Bộ sưu tập của {name}.pl")
+    db = shelve.open(f"albums/Bộ sưu tập của {name}.pl")
     db[media[0]]=media[1]
     
 def del_media(name, media):
-    db = shelve.open(f"album/Bộ sưu tập của {name}.pl")
+    db = shelve.open(f"albums/Bộ sưu tập của {name}.pl")
     del db[media]
     
