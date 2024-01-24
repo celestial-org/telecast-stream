@@ -5,7 +5,7 @@ import json
 
 @Client.on_callback_query()
 def on_callback_query_handle(c, q):
-    data = q.data.decode("utf-8")
+    data = q.data
     m = q.message
     if data == "albums-button":
         m.edit("Danh sách bộ sưu tập", reply_markup=albums())
