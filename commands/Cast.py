@@ -27,14 +27,21 @@ def play_media_queue(c, m):
     chat = m.chat.id
     link = m.command[1]
     m.delete()
-    try:
-        user = m.from_user.first_name
-    except:
-        user = m.sender_chat.title
-    st = m.reply(f"--**{user}**-- đã gửi yêu cầu phát __{link}__\nNội dung sẽ được phát sau 1 phút nữa.\nThêm vào bộ sưu tập sẽ có thể phát nhanh hơn")
-    time.sleep(60)
-    st.delete()
-    play(chat, link)
+    if not link.startswith("http") and m.from_user:
+        name = m.from_user.first_name
+        link = get_media(f"Bộ sưu tập của {name}", link)
+        st = m.reply(f"Bắt đầu phát {link} từ bộ sưu tập của {name}")
+        play(chat, link)
+        st.delete()
+    else:
+        try:
+            user = m.from_user.first_name
+        except:
+            user = m.sender_chat.title
+        st = m.reply(f"--**{user}**-- đã gửi yêu cầu phát __{link}__\nNội dung sẽ được phát sau 1 phút nữa.\nThêm vào bộ sưu tập sẽ có thể phát nhanh hơn")
+        time.sleep(60)
+        st.delete()
+        play(chat, link)
     
 @Client.on_message(filters.command('myalbum'))
 def get_album(c, m):
