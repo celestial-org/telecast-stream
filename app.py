@@ -1,6 +1,6 @@
 from pytgcalls import PyTgCalls
 from pyrogram import Client
-from pytgcalls.types import MediaStream, AudioParameters, VideoParameters, AudioQuality, VideoQuality
+from pytgcalls.types import MediaStream, AudioParameters, VideoParameters
 from init import api_id, api_hash, bot_token, session
 import os
 
