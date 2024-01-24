@@ -5,7 +5,6 @@ from init import api_id, api_hash, bot_token, session
 import os
 
 app = PyTgCalls(Client("telecast", session_string=session))
-app.start()
 
 def stream(media):
     aq = os.getenv("AUDIO_QUAL")
