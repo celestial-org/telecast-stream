@@ -31,3 +31,6 @@ def del_media(name, media):
     db = shelve.open(f"albums/Bộ sưu tập của {name}.pl")
     del db[media]
     
+def get_media(name, media):
+    db = shelve.open(f"albums/Bộ sưu tập của {name}.pl")
+    return db[media]
