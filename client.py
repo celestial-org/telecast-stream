@@ -231,7 +231,7 @@ def channels_list(c, m):
     except:
         m.reply("Tài nguyên không có sẵn", quote=True)
     
-@bot.on_callback__query()
+@bot.on_callback_query()
 def switch_play(c, cq):
     print(cq)
     pre = cq.content
