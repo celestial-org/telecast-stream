@@ -40,3 +40,14 @@ def join_chat_call(c, m):
         print(e)
         m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
     m.delete()
+    
+@Client.on_message(filters.command("addmedia"))
+def add_channel(c, m):
+    if len(m.command) > 2:
+        pre = m.command[1]
+        link = m.command[2]
+        db[pre] = link
+        m.reply(f"Đã thêm __{pre}__", quote=True)
+        m.delete()
+    else:
+        m.reply("Thiếu tham số cần thiết", quote=True)
