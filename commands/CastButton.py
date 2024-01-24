@@ -12,7 +12,7 @@ def on_callback_query_handle(c, q):
     elif data.startswith("album:"):
         data = data.replace("album:", "")
         m.edit(data, reply_markup=album(data))
-    else:
+    elif data.startswith("http"):
         try:
             chat = m.chat.id
             q.answer(f"Bắt đầu phát {media}")
