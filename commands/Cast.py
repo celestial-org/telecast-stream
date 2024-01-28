@@ -103,7 +103,7 @@ def get_album_of(c, m):
     except:
         m.reply(f"--**{name}**-- không có bộ sưu tập", quote=True)
         
-@Client.on_message(filters.text)
+@Client.on_message(filters.text, group=2)
 def Telecast_all(c, m):
     try:
         user = m.from_user.first_name
