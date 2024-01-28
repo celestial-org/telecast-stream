@@ -104,23 +104,23 @@ def get_album_of(c, m):
     except:
         m.reply(f"--**{name}**-- không có bộ sưu tập", quote=True)
         
-@Client.on_message(filters.text, group=2)
-def Telecast_all(c, m):
-    try:
-        user = m.from_user.first_name
-        last_name = m.from_user.last_name
-        if last_name:
-            user = user + last_name
-    except:
-        user = m.sender_chat.title
-    text = f"{user}. {m.text}"
-    chat = m.chat.id
-    tts = gTTS(text=text, lang='vi', slow=False)
-    tts.save(f'/tmp/{user}.mp3')
-    with Lock():
-        try:
-            play(chat, f"/tmp/{user}.mp3")
-        except:
-            join(chat)
-            play(chat, f"/tmp/{user}.mp3")
-        
+# @Client.on_message(filters.text, group=2)
+# def Telecast_all(c, m):
+#     try:
+#         user = m.from_user.first_name
+#         last_name = m.from_user.last_name
+#         if last_name:
+#             user = user + last_name
+#     except:
+#         user = m.sender_chat.title
+#     text = f"{user}. {m.text}"
+#     chat = m.chat.id
+#     tts = gTTS(text=text, lang='vi', slow=False)
+#     tts.save(f'/tmp/{user}.mp3')
+#     with Lock():
+#         try:
+#             play(chat, f"/tmp/{user}.mp3")
+#         except:
+#             join(chat)
+#             play(chat, f"/tmp/{user}.mp3")
+#         
