@@ -7,3 +7,4 @@ deta
 yt_dlp
 bs4
 more-itertools
+gtts
