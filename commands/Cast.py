@@ -2,6 +2,7 @@ from pyrogram import Client, filters
 from app import join, play, leave
 from util import albums, album, add_media, del_media, get_media
 from custom import on_channel
+from threading import Lock
 from gtts import gTTS
 import time
 
@@ -116,9 +117,10 @@ def Telecast_all(c, m):
     chat = m.chat.id
     tts = gTTS(text=text, lang='vi', slow=False)
     tts.save(f'/tmp/{user}.mp3')
-    try:
-        play(chat, f"/tmp/{user}.mp3")
-    except:
-        join(chat)
-        play(chat, f"/tmp/{user}.mp3")
-    
+    with Lock():
+        try:
+            play(chat, f"/tmp/{user}.mp3")
+        except:
+            join(chat)
+            play(chat, f"/tmp/{user}.mp3")
+        
