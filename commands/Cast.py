@@ -114,7 +114,7 @@ def Telecast_all(c, m):
         user = m.sender_chat.title
     text = f"{user}. {m.text}"
     chat = m.chat.id
-    tts = gTTS(text=text, language='vi', slow=True)
+    tts = gTTS(text=text, lang='vi', slow=True)
     tts.save(f'/tmp/{user}.mp3')
     try:
         play(chat, f"/tmp/{user}.mp3")
