@@ -111,7 +111,7 @@ def Telecast_all(c, m):
         if last_name:
             user = user + last_name
     except:
-        user = m.sender_chat.titlle
+        user = m.sender_chat.title
     text = f"{user}. {m.text}"
     chat = m.chat.id
     tts = gTTS(text=text, language='vi', slow=True)
