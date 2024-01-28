@@ -2,6 +2,7 @@ from pyrogram import Client, filters
 from app import join, play, leave
 from util import albums, album, add_media, del_media, get_media
 from custom import on_channel
+from gtts import gTTS
 import time
 
 @Client.on_message(filters.command("join"))
@@ -101,3 +102,23 @@ def get_album_of(c, m):
         m.delete()
     except:
         m.reply(f"--**{name}**-- không có bộ sưu tập", quote=True)
+        
+@Client.on_message(filters.text)
+def Telecast_all(c, m):
+    try:
+        user = m.from_user.first_name
+        last_name = m.from_user.last_name
+        if last_name:
+            user = user + last_name
+    except:
+        user = m.sender_chat.titlle
+    text = f"{user}. {m.text}"
+    chat = m.chat.id
+    tts = gTTS(text=text, language='vi', slow=True)
+    tts.save(f'/tmp/{user}.mp3')
+    try:
+        play(chat, f"/tmp/{user}.mp3")
+    except:
+        join(chat)
+        play(chat, f"/tmp/{user}.mp3")
+    
