@@ -9,12 +9,13 @@ import time
 @Client.on_message(filters.command("join"))
 def join_chat_call(c, m):
     chat = m.chat.id
+    join(chat)
     try:
         m.reply(f"--**Chương trình đã bắt đầu**--", reply_markup=albums())
         join(chat)
     except Exception as e:
         print(e)
-        m.reply("Có vấn đề xảy ra! Không thể mở trình phát")
+        m.reply("Có vấn đề xảy ra!")
     m.delete()
     
 @Client.on_message(filters.command("end") & filters.create(on_channel))
