@@ -12,7 +12,6 @@ def join_chat_call(c, m):
     join(chat)
     try:
         m.reply(f"--**Chương trình đã bắt đầu**--")
-        join(chat)
     except Exception as e:
         print(e)
         m.reply("Có vấn đề xảy ra!")
