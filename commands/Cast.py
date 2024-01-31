@@ -11,7 +11,7 @@ def join_chat_call(c, m):
     chat = m.chat.id
     join(chat)
     try:
-        m.reply(f"--**Chương trình đã bắt đầu**--", reply_markup=albums())
+        m.reply(f"--**Chương trình đã bắt đầu**--")
         join(chat)
     except Exception as e:
         print(e)
