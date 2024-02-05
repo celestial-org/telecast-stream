@@ -21,7 +21,7 @@ def add_proxy(c, m):
         
 @Client.on_message(filters.command("remove_proxy"))
 def remove_proxy(c, m):
-    os.system("pkill -9 lite")
+    os.system("pkill -9 lite &")
     del os.environ["http_proxy"]
     del os.environ["https_proxy"]
     m.reply("Đã loại bỏ proxy", quote=True)
