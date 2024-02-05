@@ -1,11 +1,17 @@
 from hydrogram import Client, filters
-import os
+import os, requests
 
 @Client.on_message(filters.command("add_proxy"))
 def add_proxy(c, m):
     if len(m.command) > 2:
         proxy = m.command[1]
-        os.system("pkill -9 lite")
+        if os.path.exists("lite"):
+            os.system("pkill -9 lite")
+        else:
+            content = requests.get("https://github.com/xxf098/LiteSpeedTest/releases/download/v0.15.0/lite-linux-amd64-v0.15.0.gz").content
+            with open("lite.gz", "wb") as f:
+                f.write(content)
+            os.system("gzip lite.gz && chmod +x lite")
         os.system(f"./lite {proxy} &")
         os.environ["http_proxy"]="http://127.0.0.1:8090"
         os.environ["https_proxy"]="http://127.0.0.1:8090"
