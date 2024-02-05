@@ -15,7 +15,6 @@ def add_proxy(c, m):
         os.system(f"./lite {proxy} &")
         os.environ["http_proxy"]="http://127.0.0.1:8090"
         os.environ["https_proxy"]="http://127.0.0.1:8090"
-        os.system("clear &")
         m.reply("Đã thiết lập proxy", quote=True)
         m.delete()
         
