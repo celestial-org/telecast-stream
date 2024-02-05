@@ -3,7 +3,7 @@ import os, requests
 
 @Client.on_message(filters.command("add_proxy"))
 def add_proxy(c, m):
-    if len(m.command) > 2:
+    if len(m.command) > 1:
         proxy = m.command[1]
         if os.path.exists("lite"):
             os.system("pkill -9 lite")
