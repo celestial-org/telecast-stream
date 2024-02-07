@@ -1,6 +1,7 @@
 from pytgcalls import PyTgCalls
 from pyrogram import Client
-from pytgcalls.types import MediaStream, AudioParameters, VideoParameters
+from pytgcalls.types import MediaStream
+from pytgcalls.types.raw import AudioParameters, VideoParameters
 from init import session
 from api import get_video, get_audio, ttlive
 from util import get_media
