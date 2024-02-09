@@ -5,6 +5,7 @@ from api import ttl
 import os
 
 session = os.getenv("SESSION")
+app = PyTgCalls(Client("telecast", session_string=session))
 
 def stream(media):
     return MediaStream(
@@ -14,17 +15,17 @@ def stream(media):
 
 class Cast:
     def __init___(self, chat):
-        self.app = PyTgCalls(Client("telecast", session_string=session))
+        self.chat = chat
     def join(self):
         try:
-            self.app.join_group_call(self.chat,)
+            app.join_group_call(self.chat,)
             return True 
         except Exception as e:
             print(e)
             return False
             
     def end(self):
-        self.app.leave_group_call(self.chat,)
+        app.leave_group_call(self.chat,)
         
     def play(self, media):
         try:
@@ -36,7 +37,7 @@ class Cast:
             media = media
             print(e)
         try:
-            self.app.change_stream(self.chat, stream(media),)
+            app.change_stream(self.chat, stream(media),)
             return True
         except Exception as e:
             print(e)
