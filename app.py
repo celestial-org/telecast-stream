@@ -42,3 +42,19 @@ class Cast:
         except Exception as e:
             print(e)
             return False
+            
+    def pause(self):
+        try:
+            app.pause_stream(self.chat,)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+            
+    def resume(self):
+        try:
+            app.resume_stream(self.chat,)
+            return True
+        except Exception as e:
+            print(e)
+            return False
