@@ -34,3 +34,4 @@ def resume_cast(c, m):
         Cast(m.chat.id).resume()
         mid = int(os.getenv(str(m.chat.id)))
         mid.delete()
+        del os.environ[str(m.chat.id)]
