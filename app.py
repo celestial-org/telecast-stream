@@ -17,6 +17,7 @@ def stream(media):
 class Cast:
     def __init___(self, chat):
         self.chat = chat
+        
     def join(self):
         try:
             app.join_group_call(self.chat,)
