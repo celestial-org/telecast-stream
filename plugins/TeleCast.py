@@ -34,6 +34,6 @@ def pause_cast(c, m):
 def resume_cast(c, m):
     if os.getenv(str(m.chat.id)):
         Cast(m.chat.id).resume()
-        mid = int(os.getenv(str(m.chat.id)))
-        mid.delete()
+        mid = os.getenv(str(m.chat.id))
+        c.delete_messages(m.chat.id, int(mid))
         del os.environ[str(m.chat.id)]
