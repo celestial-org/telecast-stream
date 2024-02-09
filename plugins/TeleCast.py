@@ -1,6 +1,6 @@
 from hydrogram import Client, filters
 from app import Cast
-import os
+import os, time
 
 def on_channel(_, __, m):
     return m.from_user.id == 5665225938 if m.from_user else (m.sender_chat.id == -1001559828576)
@@ -13,7 +13,9 @@ def join_chat_call(c, m):
         m.reply("--**Chương trình đã bắt đầu**--")
         m.delete()
     else:
-        m.reply("Không thể bắt đầu phát sóng", quote=True)
+        st = m.reply("Không thể bắt đầu phát sóng", quote=True)
+        time.sleep(10)
+        st.delete()
         
 @Client.on_message(filters.command("quit") & filters.create(on_channel))
 def leave_chat_call(c, m):
