@@ -1,5 +1,5 @@
 from pytgcalls import PyTgCalls
-from pyrogram import Client
+from hydrogram import Client
 from pytgcalls.types import MediaStream, AudioQuality, VideoQuality
 from pytgcalls.media_devices import MediaDevices
 from api import ttl
