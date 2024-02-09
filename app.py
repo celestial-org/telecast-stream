@@ -2,9 +2,9 @@ from pytgcalls import PyTgCalls
 from pyrogram import Client
 from pytgcalls.types import MediaStream, AudioQuality, VideoQuality
 from api import ttl
+from environ import session
 import os
 
-session = os.getenv("SESSION")
 app = PyTgCalls(Client("telecast", session_string=session))
 
 def stream(media):
