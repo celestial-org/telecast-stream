@@ -11,3 +11,11 @@ def play_media_queue(c, m):
     st = m.reply("Ok", quote=True)
     Cast(chat).play(link)
     st.delete()
+    
+@Client.on_message(filters.command("screen"))
+def screen_record(c, m):
+    status = Cast(m.chat.id).screen()
+    if status:
+        m.reply("Bắt đầu ghi màn hình", quote=True)
+    else:
+        m.reply("Máy chủ không có màn hình", quote=True)
