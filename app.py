@@ -15,7 +15,7 @@ def stream(media):
         VideoQuality.HD_720p)
 
 class Cast:
-    def __init___(self, chat):
+    def __init__(self, chat):
         self.chat = chat
         
     def join(self):
