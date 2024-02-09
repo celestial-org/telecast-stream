@@ -1,6 +1,7 @@
 from pytgcalls import PyTgCalls
 from pyrogram import Client
 from pytgcalls.types import MediaStream, AudioQuality, VideoQuality
+from pytgcalls.media_devices import MediaDevices
 from api import ttl
 from environ import session
 import os
@@ -54,6 +55,14 @@ class Cast:
     def resume(self):
         try:
             app.resume_stream(self.chat,)
+            return True
+        except Exception as e:
+            print(e)
+            return False
+            
+    def screen(self):
+        try:
+            app.change_stream(self.chat, MediaStream(MediaDevices.get_screen_devices()[0], audio_path=MediaDevices.get_audio_devices()[0]),)
             return True
         except Exception as e:
             print(e)
