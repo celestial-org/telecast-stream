@@ -2,7 +2,7 @@ from hydrogram import Client, filters
 from app import Cast
 
 def filter_len(_, __, m):
-    return m.command > 1
+    return len(m.command) > 1
     
 @Client.on_message(filters.command("play") & filters.regex("http://|https://") & filters.create(filter_len))
 def play_media_queue(c, m):
