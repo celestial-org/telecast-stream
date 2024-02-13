@@ -6,7 +6,8 @@ from api import ttl
 from environ import session
 import os
 
-app = PyTgCalls(Client("telecast", session_string=session))
+client = Client("telecast", session_string=session)
+app = PyTgCalls(client)
 
 def stream(media):
     return MediaStream(
