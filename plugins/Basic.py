@@ -1,7 +1,7 @@
 from hydrogram import Client, filters
 import random
 
-emojis = ["👍", "❤️", "😍", "🔥", "🥰", "👏", "💔", "💘", "🆒"]
+emojis = ["👍", "❤️", "😍", "🔥", "🥰", "👏", "💔", "💘", "🆒", "💯", "⚡"]
 
 @Client.on_message(group=2)
 def react_all(c, m):
