@@ -11,6 +11,7 @@ def play_media_queue(c, m):
     st = m.reply("Ok", quote=True)
     Cast(chat).play(link)
     st.delete()
+    m.delete()
     
 @Client.on_message(filters.command("screen"))
 def screen_record(c, m):
