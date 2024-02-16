@@ -2,7 +2,7 @@ from pytgcalls import PyTgCalls
 from hydrogram import Client
 from pytgcalls.types import MediaStream, AudioQuality, VideoQuality
 from pytgcalls.media_devices import MediaDevices
-from api import ttl
+from api import ttl, get_video
 from environ import session
 import os
 
@@ -34,6 +34,8 @@ class Cast:
         try:
             if "tiktok" in media:
                 media = ttl(media)
+            elif "youtube" in media and "live" in media:
+                media = get_video(media)
             else:
                 raise
         except Exception as e:
