@@ -3,7 +3,7 @@ from hydrogram import Client
 from pytgcalls.types import MediaStream, AudioQuality, VideoQuality
 from pytgcalls.media_devices import MediaDevices
 from youtubesearchpython import VideosSearch
-from api import ttl, get_video
+from api import ttl, get_video, get_audio
 from environ import session
 import os
 
@@ -77,4 +77,5 @@ class Cast:
        videosSearch = VideosSearch(query, limit=1)
        result = videosSearch.result()
        link = result["result"][0]["link"]
-       app.change_stream(self.chat, stream(link),)
+       media = get_audio(link)
+       app.change_stream(self.chat, stream(media),)
