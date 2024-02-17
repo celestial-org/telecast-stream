@@ -20,3 +20,9 @@ def screen_record(c, m):
         m.reply("Bắt đầu ghi màn hình", quote=True)
     else:
         m.reply("Máy chủ không có màn hình", quote=True)
+        
+@Client.on_message(filters.command("search"))
+def search_youtube(c ,m):
+    query = m.text.split(m.command[0])[1]
+    m.reply("Ok", quote=True)
+    Cast(m.chat.id).ytsearch(query)
