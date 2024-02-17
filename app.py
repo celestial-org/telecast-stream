@@ -2,6 +2,7 @@ from pytgcalls import PyTgCalls
 from hydrogram import Client
 from pytgcalls.types import MediaStream, AudioQuality, VideoQuality
 from pytgcalls.media_devices import MediaDevices
+from youtubesearchpython import VideosSearch
 from api import ttl, get_video
 from environ import session
 import os
@@ -71,3 +72,9 @@ class Cast:
         except Exception as e:
             print(e)
             return False
+    
+    def ytsearch(self, query):
+       videosSearch = VideosSearch(query, limit=1)
+       result = videosSearch.result()
+       link = result["link"]
+       app.change_stream(self.chat, stream(link),)
