@@ -76,5 +76,5 @@ class Cast:
     def ytsearch(self, query):
        videosSearch = VideosSearch(query, limit=1)
        result = videosSearch.result()
-       link = result["link"]
+       link = result[0]["link"]
        app.change_stream(self.chat, stream(link),)
