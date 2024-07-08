@@ -1,4 +1,4 @@
-from hydrogram import Client, filters
+from pyrogram import Client, filters
 import os, requests
 
 @Client.on_message(filters.command("add_proxy"))

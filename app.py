@@ -1,5 +1,5 @@
 from pytgcalls import PyTgCalls
-from hydrogram import Client
+from pyrogram import Client
 from pytgcalls.types import MediaStream, AudioQuality, VideoQuality
 from pytgcalls.media_devices import MediaDevices
 from youtubesearchpython import VideosSearch

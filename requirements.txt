@@ -1,4 +1,4 @@
-hydrogram
+pyrogram
 py-tgcalls
 flask
 gunicorn
