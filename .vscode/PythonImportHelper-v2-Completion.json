@@ -341,7 +341,7 @@
         "kind": 6,
         "importPath": "telecast.client",
         "description": "telecast.client",
-        "peekOfCode": "class Telecast:\n    def __init__(self):\n        self.config = call_config\n        self.app = telecast_app\n    def stream(self, media):\n        return MediaStream(media, AudioQuality.MEDIUM, VideoQuality.HD_720p)\n    def join(self, chat):\n        try:\n            self.app.play(chat, config=self.config)\n            return True",
+        "peekOfCode": "class Telecast:\n    def __init__(self):\n        self.config = call_config\n        self.app = telecast_app\n    def stream(self, media):\n        return MediaStream(media, AudioQuality.STUDIO, VideoQuality.FHD_1080p)\n    def join(self, chat):\n        try:\n            self.app.play(chat, config=self.config)\n            return True",
         "detail": "telecast.client",
         "documentation": {}
     },
@@ -350,7 +350,7 @@
         "kind": 2,
         "importPath": "telecast.client",
         "description": "telecast.client",
-        "peekOfCode": "def start_telecast(bot):\n    return telecast_app.start()\nclass Telecast:\n    def __init__(self):\n        self.config = call_config\n        self.app = telecast_app\n    def stream(self, media):\n        return MediaStream(media, AudioQuality.MEDIUM, VideoQuality.HD_720p)\n    def join(self, chat):\n        try:",
+        "peekOfCode": "def start_telecast(bot):\n    return telecast_app.start()\nclass Telecast:\n    def __init__(self):\n        self.config = call_config\n        self.app = telecast_app\n    def stream(self, media):\n        return MediaStream(media, AudioQuality.STUDIO, VideoQuality.FHD_1080p)\n    def join(self, chat):\n        try:",
         "detail": "telecast.client",
         "documentation": {}
     },
@@ -377,7 +377,7 @@
         "kind": 5,
         "importPath": "telecast.client",
         "description": "telecast.client",
-        "peekOfCode": "call_config = GroupCallConfig(join_as=channel_peer)\ndef start_telecast(bot):\n    return telecast_app.start()\nclass Telecast:\n    def __init__(self):\n        self.config = call_config\n        self.app = telecast_app\n    def stream(self, media):\n        return MediaStream(media, AudioQuality.MEDIUM, VideoQuality.HD_720p)\n    def join(self, chat):",
+        "peekOfCode": "call_config = GroupCallConfig(join_as=channel_peer)\ndef start_telecast(bot):\n    return telecast_app.start()\nclass Telecast:\n    def __init__(self):\n        self.config = call_config\n        self.app = telecast_app\n    def stream(self, media):\n        return MediaStream(media, AudioQuality.STUDIO, VideoQuality.FHD_1080p)\n    def join(self, chat):",
         "detail": "telecast.client",
         "documentation": {}
     },

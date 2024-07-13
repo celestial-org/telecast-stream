@@ -23,7 +23,7 @@ class Telecast:
         self.app = telecast_app
 
     def stream(self, media):
-        return MediaStream(media, AudioQuality.MEDIUM, VideoQuality.HD_720p)
+        return MediaStream(media, AudioQuality.STUDIO, VideoQuality.FHD_1080p)
 
     def join(self, chat):
         try:
