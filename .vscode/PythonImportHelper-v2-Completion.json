@@ -269,7 +269,16 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def play_media(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    if len(m.command) == 1:\n        m.reply(\"Vui lòng cung cấp link hoặc nội dung để phát\", quote=True)\n    link = m.text.split(m.command[0])[1]\n    title_link = link\n    if \"music=\" in link:\n        link = link.split(\"music=\")[1]",
+        "peekOfCode": "def play_media(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    if len(m.command) == 1:\n        m.reply(\"Vui lòng cung cấp link hoặc nội dung để phát\", quote=True)\n    link = m.text.split(m.command[0])[1]\n    title_link = link\n    if not any(i in link for i in [\"https://\", \"http://\"]):\n        link = ytsearch(link)",
+        "detail": "plugins.streams",
+        "documentation": {}
+    },
+    {
+        "label": "play_music",
+        "kind": 2,
+        "importPath": "plugins.streams",
+        "description": "plugins.streams",
+        "peekOfCode": "def play_music(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    link = m.text.split(m.command[0])[1]\n    title_link = link\n    if not any(i in link for i in [\"https://\", \"http://\"]):\n        link = ytsearch(link)\n    else:\n        link = [part for part in m.command if part.startswith(\"http\")][0]",
         "detail": "plugins.streams",
         "documentation": {}
     },

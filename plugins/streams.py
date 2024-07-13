@@ -52,15 +52,31 @@ def play_media(c, m):
         m.reply("Vui lòng cung cấp link hoặc nội dung để phát", quote=True)
     link = m.text.split(m.command[0])[1]
     title_link = link
-    if "music=" in link:
-        link = link.split("music=")[1]
-        link = get_audio(link)
     if not any(i in link for i in ["https://", "http://"]):
         link = ytsearch(link)
+    else:
+        link = [part for part in m.command if part.startswith("http")][0]
     if "tiktok" in link:
         live_link = getlive(link)
         if live_link:
             link = live_link
+    m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title_link}```", quote=True)
+    m.delete()
+    streamer.play(chat, link)
+
+
+@Client.on_message(filters.command("playmusic") & filters.create(filter_len))
+def play_music(c, m):
+    chat = m.chat.id
+    if chat in owner:
+        chat = -1001559828576
+    link = m.text.split(m.command[0])[1]
+    title_link = link
+    if not any(i in link for i in ["https://", "http://"]):
+        link = ytsearch(link)
+    else:
+        link = [part for part in m.command if part.startswith("http")][0]
+    link = get_audio(link)
     m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title_link}```", quote=True)
     m.delete()
     streamer.play(chat, link)
