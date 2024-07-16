@@ -81,6 +81,22 @@
         "documentation": {}
     },
     {
+        "label": "get_video",
+        "importPath": "util",
+        "description": "util",
+        "isExtraImport": true,
+        "detail": "util",
+        "documentation": {}
+    },
+    {
+        "label": "ytsearch",
+        "importPath": "util",
+        "description": "util",
+        "isExtraImport": true,
+        "detail": "util",
+        "documentation": {}
+    },
+    {
         "label": "PyTgCalls",
         "importPath": "pytgcalls",
         "description": "pytgcalls",
@@ -196,6 +212,14 @@
         "documentation": {}
     },
     {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
         "label": "response",
         "importPath": "urllib",
         "description": "urllib",
@@ -218,6 +242,14 @@
         "description": "telecast.client",
         "isExtraImport": true,
         "detail": "telecast.client",
+        "documentation": {}
+    },
+    {
+        "label": "ytsearch",
+        "importPath": "util.yt",
+        "description": "util.yt",
+        "isExtraImport": true,
+        "detail": "util.yt",
         "documentation": {}
     },
     {
@@ -269,7 +301,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def play_media(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    if len(m.command) == 1:\n        m.reply(\"Vui lòng cung cấp link hoặc nội dung để phát\", quote=True)\n    link = m.text.split(m.command[0])[1]\n    title_link = link\n    if not any(i in link for i in [\"https://\", \"http://\"]):\n        link = ytsearch(link)",
+        "peekOfCode": "def play_media(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    if len(m.command) == 1:\n        m.reply(\"Vui lòng cung cấp link hoặc nội dung để phát\", quote=True)\n    link = m.text.split(m.command[0])[1]\n    if not any(i in link for i in [\"https://\", \"http://\"]):\n        link = ytsearch(link)\n    else:",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -278,7 +310,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def play_music(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    link = m.text.split(m.command[0])[1]\n    title_link = link\n    if not any(i in link for i in [\"https://\", \"http://\"]):\n        link = ytsearch(link)\n    else:\n        link = [part for part in m.command if part.startswith(\"http\")][0]",
+        "peekOfCode": "def play_music(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    link = m.text.split(m.command[0])[1]\n    if not any(i in link for i in [\"https://\", \"http://\"]):\n        link = ytsearch(link)\n    else:\n        link = [part for part in m.command if part.startswith(\"http\")][0]\n    result = get_audio(link)",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -391,11 +423,20 @@
         "documentation": {}
     },
     {
+        "label": "Result",
+        "kind": 6,
+        "importPath": "util.yt",
+        "description": "util.yt",
+        "peekOfCode": "class Result(BaseModel):\n    title: str\n    url: str\ndef get_video(video_url):\n    ydl_opts = {\"format\": \"best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(video_url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        return Result(title=title, url=url)",
+        "detail": "util.yt",
+        "documentation": {}
+    },
+    {
         "label": "get_video",
         "kind": 2,
         "importPath": "util.yt",
         "description": "util.yt",
-        "peekOfCode": "def get_video(video_url):\n    ydl_opts = {\"format\": \"best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(video_url, download=False)\n        return info_dict[\"url\"]\ndef get_audio(url):\n    ydl_opts = {\"format\": \"bestaudio/best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(url, download=False)\n        return info_dict[\"url\"]",
+        "peekOfCode": "def get_video(video_url):\n    ydl_opts = {\"format\": \"best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(video_url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        return Result(title=title, url=url)\ndef get_audio(url):\n    ydl_opts = {\"format\": \"bestaudio/best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:",
         "detail": "util.yt",
         "documentation": {}
     },
@@ -404,7 +445,7 @@
         "kind": 2,
         "importPath": "util.yt",
         "description": "util.yt",
-        "peekOfCode": "def get_audio(url):\n    ydl_opts = {\"format\": \"bestaudio/best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(url, download=False)\n        return info_dict[\"url\"]\ndef ytsearch(query):\n    videosSearch = VideosSearch(query, limit=1)\n    result = videosSearch.result()\n    return result[\"result\"][0][\"link\"]",
+        "peekOfCode": "def get_audio(url):\n    ydl_opts = {\"format\": \"bestaudio/best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        return Result(title=title, url=url)\ndef ytsearch(query):\n    videosSearch = VideosSearch(query, limit=1)\n    result = videosSearch.result()",
         "detail": "util.yt",
         "documentation": {}
     },
@@ -413,7 +454,7 @@
         "kind": 2,
         "importPath": "util.yt",
         "description": "util.yt",
-        "peekOfCode": "def ytsearch(query):\n    videosSearch = VideosSearch(query, limit=1)\n    result = videosSearch.result()\n    return result[\"result\"][0][\"link\"]",
+        "peekOfCode": "def ytsearch(query):\n    videosSearch = VideosSearch(query, limit=1)\n    result = videosSearch.result()\n    link = result[\"result\"][0][\"link\"]\n    return link",
         "detail": "util.yt",
         "documentation": {}
     },
@@ -469,6 +510,15 @@
         "description": "main",
         "peekOfCode": "bot = Client(\n    \"telecast_manager\",\n    21021245,\n    \"7b32ea92719781c5e22ede319c5dbde5\",\n    bot_token=BOT_TOKEN,\n    plugins=dict(root=\"plugins\"),\n)\nbot.start()\nstart_telecast(bot)\nidle()",
         "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "link",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "link = ytsearch('nguoi la oi')\nwith open(\"test.json\", \"w\") as f:\n    json.dump(link, f)\nprint(link)",
+        "detail": "test",
         "documentation": {}
     },
     {

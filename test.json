@@ -1,0 +1,59 @@
+{
+  "result": [
+    {
+      "type": "video",
+      "id": "g20t_K9dlhU",
+      "title": "Ng\u01b0\u1eddi L\u1ea1 \u01a0i ! Official MV | Ch\u00e2u \u0110\u0103ng Khoa x Karik x Orange",
+      "publishedTime": "6 years ago",
+      "duration": "4:49",
+      "viewCount": { "text": "228,502,833 views", "short": "228M views" },
+      "thumbnails": [
+        {
+          "url": "https://i.ytimg.com/vi/g20t_K9dlhU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC0s9VVIaUWmQdkkFjZdTJ8olV2IA",
+          "width": 360,
+          "height": 202
+        },
+        {
+          "url": "https://i.ytimg.com/vi/g20t_K9dlhU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCam9Wp5D4uLO-c-kgHaBWpfDou_A",
+          "width": 720,
+          "height": 404
+        }
+      ],
+      "richThumbnail": {
+        "url": "https://i.ytimg.com/an_webp/g20t_K9dlhU/mqdefault_6s.webp?du=3000&sqp=CLzk1rQG&rs=AOn4CLAhd8BFId7sAoBUYiATEORmGlAUNw",
+        "width": 320,
+        "height": 180
+      },
+      "descriptionSnippet": [
+        { "text": "Ng\u01b0\u1eddi L\u1ea1 \u01a0i", "bold": true },
+        { "text": " ! " },
+        { "text": "Ng\u01b0\u1eddi l\u1ea1 \u01a1i", "bold": true },
+        {
+          "text": " ! Xin h\u00e3y cho t\u00f4i m\u01b0\u1ee3n b\u1edd vai T\u1ef1a \u0111\u1ea7u g\u1ee5c ng\u00e3 v\u00ec m\u1ecfi m\u1ec7t qu\u00e1 "
+        },
+        { "text": "Ng\u01b0\u1eddi l\u1ea1 \u01a1i", "bold": true },
+        {
+          "text": " ! Xin h\u00e3y cho t\u00f4i m\u01b0\u1ee3n n\u1ee5\u00a0..."
+        }
+      ],
+      "channel": {
+        "name": "Superbrothers",
+        "id": "UCaHtBzN8AY5dJJXUi5yi30w",
+        "thumbnails": [
+          {
+            "url": "https://yt3.ggpht.com/j7uhGCVn1FIe5kV34-PIr8oPQoDpTrWaYY-_Tdnxp0CCOyrElznHpeD3Ukt2GP4kZZm2wsEh1g=s68-c-k-c0x00ffffff-no-rj",
+            "width": 68,
+            "height": 68
+          }
+        ],
+        "link": "https://www.youtube.com/channel/UCaHtBzN8AY5dJJXUi5yi30w"
+      },
+      "accessibility": {
+        "title": "Ng\u01b0\u1eddi L\u1ea1 \u01a0i ! Official MV | Ch\u00e2u \u0110\u0103ng Khoa x Karik x Orange by Superbrothers 228,502,833 views 6 years ago 4 minutes, 49 seconds",
+        "duration": "4 minutes, 49 seconds"
+      },
+      "link": "https://www.youtube.com/watch?v=g20t_K9dlhU",
+      "shelfTitle": null
+    }
+  ]
+}

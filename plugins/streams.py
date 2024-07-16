@@ -1,7 +1,7 @@
 import shelve
 from pyrogram import Client, filters
 from telecast import Telecast
-from util import ytsearch, getlive, get_audio
+from util import ytsearch, getlive, get_audio, get_video
 
 streamer = Telecast()
 owner = [5665225938, 7317791383]
@@ -51,7 +51,6 @@ def play_media(c, m):
     if len(m.command) == 1:
         m.reply("Vui lòng cung cấp link hoặc nội dung để phát", quote=True)
     link = m.text.split(m.command[0])[1]
-    title_link = link
     if not any(i in link for i in ["https://", "http://"]):
         link = ytsearch(link)
     else:
@@ -60,7 +59,12 @@ def play_media(c, m):
         live_link = getlive(link)
         if live_link:
             link = live_link
-    m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title_link}```", quote=True)
+            title = " TikTok Livestream"
+    else:
+        result = get_video(link)
+        link = result.url
+        title = result.title
+    m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True)
     m.delete()
     streamer.play(chat, link)
 
@@ -71,13 +75,14 @@ def play_music(c, m):
     if chat in owner:
         chat = -1001559828576
     link = m.text.split(m.command[0])[1]
-    title_link = link
     if not any(i in link for i in ["https://", "http://"]):
         link = ytsearch(link)
     else:
         link = [part for part in m.command if part.startswith("http")][0]
-    link = get_audio(link)
-    m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title_link}```", quote=True)
+    result = get_audio(link)
+    link = result.url
+    title = result.title
+    m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True)
     m.delete()
     streamer.play(chat, link)
 

@@ -9,3 +9,4 @@ bs4
 more-itertools
 requests
 youtube-search-python
+pydantic
