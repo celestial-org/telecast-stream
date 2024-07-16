@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class Result(BaseModel):
     title: str
     url: str
+    thumbnail: str
 
 
 def get_video(video_url):
@@ -14,7 +15,8 @@ def get_video(video_url):
         info_dict = ydl.extract_info(video_url, download=False)
         url = info_dict["url"]
         title = info_dict["fulltitle"]
-        return Result(title=title, url=url)
+        thumbnail = info_dict["thumbnail"]
+        return Result(title=title, url=url, thumbnail=thumbnail)
 
 
 def get_audio(url):
@@ -23,7 +25,8 @@ def get_audio(url):
         info_dict = ydl.extract_info(url, download=False)
         url = info_dict["url"]
         title = info_dict["fulltitle"]
-        return Result(title=title, url=url)
+        thumbnail = info_dict["thumbnail"]
+        return Result(title=title, url=url, thumbnail=thumbnail)
 
 
 def ytsearch(query):

@@ -60,11 +60,15 @@ def play_media(c, m):
         if live_link:
             link = live_link
             title = " TikTok Livestream"
+            m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True)
     else:
         result = get_video(link)
         link = result.url
         title = result.title
-    m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True)
+        thumbnail = result.thumbnail
+        m.reply_photo(
+            thumbnail, caption=f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True
+        )
     m.delete()
     streamer.play(chat, link)
 
@@ -82,7 +86,10 @@ def play_music(c, m):
     result = get_audio(link)
     link = result.url
     title = result.title
-    m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True)
+    thumbnail = result.thumbnail
+    m.reply_photo(
+        thumbnail, caption=f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True
+    )
     m.delete()
     streamer.play(chat, link)
 
