@@ -1,5 +1,6 @@
 import shelve
 from pyrogram import Client, filters
+from pyrogram.enums import ChatAction
 from telecast import Telecast
 from util import ytsearch, getlive, get_audio, get_video
 
@@ -20,6 +21,7 @@ def filter_len(_, __, m):
 
 @Client.on_message(filters.command("join"))
 def join_chat(c, m):
+    m.reply_chat_action(ChatAction.TYPING)
     chat = m.chat.id
     if chat in owner:
         chat = -1001559828576
@@ -32,6 +34,7 @@ def join_chat(c, m):
 
 @Client.on_message(filters.command("leave") & filters.create(on_channel))
 def leave_chat_call(c, m):
+    m.reply_chat_action(ChatAction.TYPING)
     chat = m.chat.id
     if chat in owner:
         chat = -1001559828576
@@ -45,6 +48,7 @@ def leave_chat_call(c, m):
 
 @Client.on_message(filters.command("play"))
 def play_media(c, m):
+    m.reply_chat_action(ChatAction.TYPING)
     chat = m.chat.id
     if chat in owner:
         chat = -1001559828576
@@ -62,10 +66,9 @@ def play_media(c, m):
             title = " TikTok Livestream"
             m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True)
     else:
-        result = get_video(link)
+        result, thumbnail = get_video(link)
         link = result.url
         title = result.title
-        thumbnail = result.thumbnail
         m.reply_photo(
             thumbnail, caption=f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True
         )
@@ -75,6 +78,7 @@ def play_media(c, m):
 
 @Client.on_message(filters.command("playmusic") & filters.create(filter_len))
 def play_music(c, m):
+    m.reply_chat_action(ChatAction.TYPING)
     chat = m.chat.id
     if chat in owner:
         chat = -1001559828576
@@ -83,10 +87,9 @@ def play_music(c, m):
         link = ytsearch(link)
     else:
         link = [part for part in m.command if part.startswith("http")][0]
-    result = get_audio(link)
+    result, thumbnail = get_audio(link)
     link = result.url
     title = result.title
-    thumbnail = result.thumbnail
     m.reply_photo(
         thumbnail, caption=f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True
     )
@@ -96,6 +99,7 @@ def play_music(c, m):
 
 @Client.on_message(filters.command("screen"))
 def screen_record(c, m):
+    m.reply_chat_action(ChatAction.TYPING)
     chat = m.chat.id
     if chat in owner:
         chat = -1001559828576
@@ -108,6 +112,7 @@ def screen_record(c, m):
 
 @Client.on_message(filters.command("pause"))
 def pause_cast(c, m):
+    m.reply_chat_action(ChatAction.TYPING)
     chat = m.chat.id
     if chat in owner:
         chat = -1001559828576
@@ -118,6 +123,7 @@ def pause_cast(c, m):
 
 @Client.on_message(filters.command("resume"))
 def resume_cast(c, m):
+    m.reply_chat_action(ChatAction.TYPING)
     chat = m.chat.id
     if chat in owner:
         chat = -1001559828576

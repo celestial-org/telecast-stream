@@ -8,7 +8,6 @@ from pydantic import BaseModel
 class Result(BaseModel):
     title: str
     url: str
-    thumbnail: str
 
 
 def get_thumbnail(url):
@@ -26,7 +25,13 @@ def get_video(video_url):
         title = info_dict["fulltitle"]
         thumbnail = info_dict["thumbnail"]
         thumbnail = get_thumbnail(thumbnail)
-        return Result(title=title, url=url, thumbnail=thumbnail)
+        return (
+            Result(
+                title=title,
+                url=url,
+            ),
+            thumbnail,
+        )
 
 
 def get_audio(url):
@@ -37,7 +42,13 @@ def get_audio(url):
         title = info_dict["fulltitle"]
         thumbnail = info_dict["thumbnail"]
         thumbnail = get_thumbnail(thumbnail)
-        return Result(title=title, url=url, thumbnail=thumbnail)
+        return (
+            Result(
+                title=title,
+                url=url,
+            ),
+            thumbnail,
+        )
 
 
 def ytsearch(query):

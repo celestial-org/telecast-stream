@@ -49,6 +49,14 @@
         "documentation": {}
     },
     {
+        "label": "ChatAction",
+        "importPath": "pyrogram.enums",
+        "description": "pyrogram.enums",
+        "isExtraImport": true,
+        "detail": "pyrogram.enums",
+        "documentation": {}
+    },
+    {
         "label": "Telecast",
         "importPath": "telecast",
         "description": "telecast",
@@ -258,7 +266,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def on_channel(_, __, m):\n    return (\n        m.from_user.id in owner if m.from_user else (m.sender_chat.id == -1001559828576)\n    )\ndef filter_len(_, __, m):\n    return len(m.command) > 1\n@Client.on_message(filters.command(\"join\"))\ndef join_chat(c, m):\n    chat = m.chat.id\n    if chat in owner:",
+        "peekOfCode": "def on_channel(_, __, m):\n    return (\n        m.from_user.id in owner if m.from_user else (m.sender_chat.id == -1001559828576)\n    )\ndef filter_len(_, __, m):\n    return len(m.command) > 1\n@Client.on_message(filters.command(\"join\"))\ndef join_chat(c, m):\n    m.reply_chat_action(ChatAction.TYPING)\n    chat = m.chat.id",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -267,7 +275,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def filter_len(_, __, m):\n    return len(m.command) > 1\n@Client.on_message(filters.command(\"join\"))\ndef join_chat(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    status = streamer.join(chat)\n    if status:\n        m.reply(\"**Chương trình đã bắt đầu**\")",
+        "peekOfCode": "def filter_len(_, __, m):\n    return len(m.command) > 1\n@Client.on_message(filters.command(\"join\"))\ndef join_chat(c, m):\n    m.reply_chat_action(ChatAction.TYPING)\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    status = streamer.join(chat)\n    if status:",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -276,7 +284,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def join_chat(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    status = streamer.join(chat)\n    if status:\n        m.reply(\"**Chương trình đã bắt đầu**\")\n    else:\n        m.reply(\"**Không thể bắt đầu phát sóng**\", quote=True)\n@Client.on_message(filters.command(\"leave\") & filters.create(on_channel))",
+        "peekOfCode": "def join_chat(c, m):\n    m.reply_chat_action(ChatAction.TYPING)\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    status = streamer.join(chat)\n    if status:\n        m.reply(\"**Chương trình đã bắt đầu**\")\n    else:\n        m.reply(\"**Không thể bắt đầu phát sóng**\", quote=True)",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -285,7 +293,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def leave_chat_call(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    played_time = streamer.played_time(chat)\n    streamer.leave(chat)\n    m.reply(\n        f\"**Chương trình đã kết thúc** ```\\nplayed time: {played_time}```\", quote=True\n    )\n    m.delete()",
+        "peekOfCode": "def leave_chat_call(c, m):\n    m.reply_chat_action(ChatAction.TYPING)\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    played_time = streamer.played_time(chat)\n    streamer.leave(chat)\n    m.reply(\n        f\"**Chương trình đã kết thúc** ```\\nplayed time: {played_time}```\", quote=True\n    )",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -294,7 +302,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def play_media(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    if len(m.command) == 1:\n        m.reply(\"Vui lòng cung cấp link hoặc nội dung để phát\", quote=True)\n    link = m.text.split(m.command[0])[1]\n    if not any(i in link for i in [\"https://\", \"http://\"]):\n        link = ytsearch(link)\n    else:",
+        "peekOfCode": "def play_media(c, m):\n    m.reply_chat_action(ChatAction.TYPING)\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    if len(m.command) == 1:\n        m.reply(\"Vui lòng cung cấp link hoặc nội dung để phát\", quote=True)\n    link = m.text.split(m.command[0])[1]\n    if not any(i in link for i in [\"https://\", \"http://\"]):\n        link = ytsearch(link)",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -303,7 +311,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def play_music(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    link = m.text.split(m.command[0])[1]\n    if not any(i in link for i in [\"https://\", \"http://\"]):\n        link = ytsearch(link)\n    else:\n        link = [part for part in m.command if part.startswith(\"http\")][0]\n    result = get_audio(link)",
+        "peekOfCode": "def play_music(c, m):\n    m.reply_chat_action(ChatAction.TYPING)\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    link = m.text.split(m.command[0])[1]\n    if not any(i in link for i in [\"https://\", \"http://\"]):\n        link = ytsearch(link)\n    else:\n        link = [part for part in m.command if part.startswith(\"http\")][0]",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -312,7 +320,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def screen_record(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    status = streamer.screen(chat)\n    if status:\n        m.reply(\"Bắt đầu ghi màn hình\", quote=True)\n    else:\n        m.reply(\"Máy chủ không có màn hình\", quote=True)\n@Client.on_message(filters.command(\"pause\"))",
+        "peekOfCode": "def screen_record(c, m):\n    m.reply_chat_action(ChatAction.TYPING)\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    status = streamer.screen(chat)\n    if status:\n        m.reply(\"Bắt đầu ghi màn hình\", quote=True)\n    else:\n        m.reply(\"Máy chủ không có màn hình\", quote=True)",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -321,7 +329,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def pause_cast(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    if not kv.get(str(chat)) or kv[str(chat)][0] != \"paused\":\n        st = m.reply(\"Đang tạm dừng\", quote=True)\n        kv[str(chat)] = [\"paused\", st.id]\n@Client.on_message(filters.command(\"resume\"))\ndef resume_cast(c, m):\n    chat = m.chat.id",
+        "peekOfCode": "def pause_cast(c, m):\n    m.reply_chat_action(ChatAction.TYPING)\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    if not kv.get(str(chat)) or kv[str(chat)][0] != \"paused\":\n        st = m.reply(\"Đang tạm dừng\", quote=True)\n        kv[str(chat)] = [\"paused\", st.id]\n@Client.on_message(filters.command(\"resume\"))\ndef resume_cast(c, m):",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -330,7 +338,7 @@
         "kind": 2,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "def resume_cast(c, m):\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    if kv.get(str(chat)) and kv[str(chat)][0] == \"paused\":\n        streamer.resume(chat)\n        mid = kv[str(chat)][1]\n        c.delete_messages(m.chat.id, int(mid))\n        kv[str(chat)] = [\"playing\", mid]",
+        "peekOfCode": "def resume_cast(c, m):\n    m.reply_chat_action(ChatAction.TYPING)\n    chat = m.chat.id\n    if chat in owner:\n        chat = -1001559828576\n    if kv.get(str(chat)) and kv[str(chat)][0] == \"paused\":\n        streamer.resume(chat)\n        mid = kv[str(chat)][1]\n        c.delete_messages(m.chat.id, int(mid))\n        kv[str(chat)] = [\"playing\", mid]",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -357,7 +365,7 @@
         "kind": 5,
         "importPath": "plugins.streams",
         "description": "plugins.streams",
-        "peekOfCode": "kv = shelve.open(\"streamer.status\")\ndef on_channel(_, __, m):\n    return (\n        m.from_user.id in owner if m.from_user else (m.sender_chat.id == -1001559828576)\n    )\ndef filter_len(_, __, m):\n    return len(m.command) > 1\n@Client.on_message(filters.command(\"join\"))\ndef join_chat(c, m):\n    chat = m.chat.id",
+        "peekOfCode": "kv = shelve.open(\"streamer.status\")\ndef on_channel(_, __, m):\n    return (\n        m.from_user.id in owner if m.from_user else (m.sender_chat.id == -1001559828576)\n    )\ndef filter_len(_, __, m):\n    return len(m.command) > 1\n@Client.on_message(filters.command(\"join\"))\ndef join_chat(c, m):\n    m.reply_chat_action(ChatAction.TYPING)",
         "detail": "plugins.streams",
         "documentation": {}
     },
@@ -420,7 +428,7 @@
         "kind": 6,
         "importPath": "util.yt",
         "description": "util.yt",
-        "peekOfCode": "class Result(BaseModel):\n    title: str\n    url: str\n    thumbnail: str\ndef get_thumbnail(url):\n    req = requests.get(url, timeout=10)\n    img = io.BytesIO(req.content)\n    img.name = \"thumbnail.jpg\"\n    return img\ndef get_video(video_url):",
+        "peekOfCode": "class Result(BaseModel):\n    title: str\n    url: str\ndef get_thumbnail(url):\n    req = requests.get(url, timeout=10)\n    img = io.BytesIO(req.content)\n    img.name = \"thumbnail.jpg\"\n    return img\ndef get_video(video_url):\n    ydl_opts = {\"format\": \"best\"}",
         "detail": "util.yt",
         "documentation": {}
     },
@@ -438,7 +446,7 @@
         "kind": 2,
         "importPath": "util.yt",
         "description": "util.yt",
-        "peekOfCode": "def get_video(video_url):\n    ydl_opts = {\"format\": \"best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(video_url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        thumbnail = info_dict[\"thumbnail\"]\n        thumbnail = get_thumbnail(thumbnail)\n        return Result(title=title, url=url, thumbnail=thumbnail)\ndef get_audio(url):",
+        "peekOfCode": "def get_video(video_url):\n    ydl_opts = {\"format\": \"best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(video_url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        thumbnail = info_dict[\"thumbnail\"]\n        thumbnail = get_thumbnail(thumbnail)\n        return (\n            Result(",
         "detail": "util.yt",
         "documentation": {}
     },
@@ -447,7 +455,7 @@
         "kind": 2,
         "importPath": "util.yt",
         "description": "util.yt",
-        "peekOfCode": "def get_audio(url):\n    ydl_opts = {\"format\": \"bestaudio/best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        thumbnail = info_dict[\"thumbnail\"]\n        thumbnail = get_thumbnail(thumbnail)\n        return Result(title=title, url=url, thumbnail=thumbnail)\ndef ytsearch(query):",
+        "peekOfCode": "def get_audio(url):\n    ydl_opts = {\"format\": \"bestaudio/best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        thumbnail = info_dict[\"thumbnail\"]\n        thumbnail = get_thumbnail(thumbnail)\n        return (\n            Result(",
         "detail": "util.yt",
         "documentation": {}
     },
