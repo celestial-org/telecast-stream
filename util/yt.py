@@ -1,3 +1,5 @@
+import io
+import requests
 import yt_dlp
 from youtubesearchpython import VideosSearch
 from pydantic import BaseModel
@@ -9,6 +11,13 @@ class Result(BaseModel):
     thumbnail: str
 
 
+def get_thumbnail(url):
+    req = requests.get(url, timeout=10)
+    img = io.BytesIO(req.content)
+    img.name = "thumbnail.jpg"
+    return img
+
+
 def get_video(video_url):
     ydl_opts = {"format": "best"}
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -16,6 +25,7 @@ def get_video(video_url):
         url = info_dict["url"]
         title = info_dict["fulltitle"]
         thumbnail = info_dict["thumbnail"]
+        thumbnail = get_thumbnail(thumbnail)
         return Result(title=title, url=url, thumbnail=thumbnail)
 
 
@@ -26,6 +36,7 @@ def get_audio(url):
         url = info_dict["url"]
         title = info_dict["fulltitle"]
         thumbnail = info_dict["thumbnail"]
+        thumbnail = get_thumbnail(thumbnail)
         return Result(title=title, url=url, thumbnail=thumbnail)
 
 

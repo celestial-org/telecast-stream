@@ -187,6 +187,15 @@
         "documentation": {}
     },
     {
+        "label": "io",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "io",
+        "description": "io",
+        "detail": "io",
+        "documentation": {}
+    },
+    {
         "label": "yt_dlp",
         "kind": 6,
         "isExtraImport": true,
@@ -411,7 +420,16 @@
         "kind": 6,
         "importPath": "util.yt",
         "description": "util.yt",
-        "peekOfCode": "class Result(BaseModel):\n    title: str\n    url: str\n    thumbnail: str\ndef get_video(video_url):\n    ydl_opts = {\"format\": \"best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(video_url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]",
+        "peekOfCode": "class Result(BaseModel):\n    title: str\n    url: str\n    thumbnail: str\ndef get_thumbnail(url):\n    req = requests.get(url, timeout=10)\n    img = io.BytesIO(req.content)\n    img.name = \"thumbnail.jpg\"\n    return img\ndef get_video(video_url):",
+        "detail": "util.yt",
+        "documentation": {}
+    },
+    {
+        "label": "get_thumbnail",
+        "kind": 2,
+        "importPath": "util.yt",
+        "description": "util.yt",
+        "peekOfCode": "def get_thumbnail(url):\n    req = requests.get(url, timeout=10)\n    img = io.BytesIO(req.content)\n    img.name = \"thumbnail.jpg\"\n    return img\ndef get_video(video_url):\n    ydl_opts = {\"format\": \"best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(video_url, download=False)\n        url = info_dict[\"url\"]",
         "detail": "util.yt",
         "documentation": {}
     },
@@ -420,7 +438,7 @@
         "kind": 2,
         "importPath": "util.yt",
         "description": "util.yt",
-        "peekOfCode": "def get_video(video_url):\n    ydl_opts = {\"format\": \"best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(video_url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        thumbnail = info_dict[\"thumbnail\"]\n        return Result(title=title, url=url, thumbnail=thumbnail)\ndef get_audio(url):\n    ydl_opts = {\"format\": \"bestaudio/best\"}",
+        "peekOfCode": "def get_video(video_url):\n    ydl_opts = {\"format\": \"best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(video_url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        thumbnail = info_dict[\"thumbnail\"]\n        thumbnail = get_thumbnail(thumbnail)\n        return Result(title=title, url=url, thumbnail=thumbnail)\ndef get_audio(url):",
         "detail": "util.yt",
         "documentation": {}
     },
@@ -429,7 +447,7 @@
         "kind": 2,
         "importPath": "util.yt",
         "description": "util.yt",
-        "peekOfCode": "def get_audio(url):\n    ydl_opts = {\"format\": \"bestaudio/best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        thumbnail = info_dict[\"thumbnail\"]\n        return Result(title=title, url=url, thumbnail=thumbnail)\ndef ytsearch(query):\n    videosSearch = VideosSearch(query, limit=1)",
+        "peekOfCode": "def get_audio(url):\n    ydl_opts = {\"format\": \"bestaudio/best\"}\n    with yt_dlp.YoutubeDL(ydl_opts) as ydl:\n        info_dict = ydl.extract_info(url, download=False)\n        url = info_dict[\"url\"]\n        title = info_dict[\"fulltitle\"]\n        thumbnail = info_dict[\"thumbnail\"]\n        thumbnail = get_thumbnail(thumbnail)\n        return Result(title=title, url=url, thumbnail=thumbnail)\ndef ytsearch(query):",
         "detail": "util.yt",
         "documentation": {}
     },
