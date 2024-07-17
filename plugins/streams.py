@@ -55,6 +55,7 @@ def play_media(c, m):
     if len(m.command) == 1:
         m.reply("Vui lòng cung cấp link hoặc nội dung để phát", quote=True)
     link = m.text.split(m.command[0])[1]
+    thumbnail = "picture.png"
     if not any(i in link for i in ["https://", "http://"]):
         link = ytsearch(link)
     else:
@@ -64,7 +65,6 @@ def play_media(c, m):
         if live_link:
             link = live_link
             title = " TikTok Livestream"
-            m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True)
     else:
         try:
             result, thumbnail = get_video(link)
@@ -73,9 +73,9 @@ def play_media(c, m):
         except Exception as e:
             print(e)
             title = "DIRECT LINK"
-        m.reply_photo(
-            thumbnail, caption=f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True
-        )
+    m.reply_photo(
+        thumbnail, caption=f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True
+    )
     m.delete()
     streamer.play(chat, link)
 
