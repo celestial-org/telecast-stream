@@ -66,9 +66,13 @@ def play_media(c, m):
             title = " TikTok Livestream"
             m.reply(f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True)
     else:
-        result, thumbnail = get_video(link)
-        link = result.url
-        title = result.title
+        try:
+            result, thumbnail = get_video(link)
+            link = result.url
+            title = result.title
+        except Exception as e:
+            print(e)
+            title = "DIRECT LINK"
         m.reply_photo(
             thumbnail, caption=f"**Bắt đầu phát sóng:**\n ```\n{title}```", quote=True
         )
